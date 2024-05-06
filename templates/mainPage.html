@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+{% extends "barraNavegacion.html"%} {% block page_content %}
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/static/styles/styles.css" />
+	</head>
+	<body>
+		<aside id="panel_navegation">
+			<table class="tabla" width="100%">
+				<td>
+					<div class="box-txt">
+						<h3>Panel de navegación</h3>
+					</div>
+					<div class="dropdown">
+						<button
+							class="btn btn-secondary dropdown-toggle"
+							type="button"
+							id="dropdownMenuButton1"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Pedido
+							<label class="label_hamburguesa" for="menu_hamburguesa"
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									class="list_icon"
+									viewBox="0 0 16 16"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+									/>
+								</svg>
+							</label>
+							<input
+								class="menu_hamburguesa"
+								type="checkbox"
+								name=""
+								id="menu_hamburguesa"
+							/>
+						</button>
+						<ul
+							class="dropdown-menu dropdown-menu-dark"
+							aria-labelledby="dropdownMenuButton1"
+						>
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('crearPedido') }}"
+									target="principal"
+								>
+									Crear Pedido
+								</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('modificarPedido') }}"
+									target="principal"
+								>
+									Modificar Pedido
+								</a>
+							</li>
+
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('consultarPedido') }}"
+									target="principal"
+									>Consultar Pedido
+								</a>
+							</li>
+						</ul>
+						<button
+							class="btn btn-secondary dropdown-toggle"
+							type="button"
+							id="dropdownMenuButton2"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							Materiales
+							<label class="label_hamburguesa" for="menu_hamburguesa"
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="16"
+									height="16"
+									fill="currentColor"
+									class="list_icon"
+									viewBox="0 0 16 16"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+									/>
+								</svg>
+							</label>
+							<input
+								class="menu_hamburguesa"
+								type="checkbox"
+								name=""
+								id="menu_hamburguesa"
+							/>
+						</button>
+						<ul
+							class="dropdown-menu dropdown-menu-dark"
+							aria-labelledby="dropdownMenuButton2"
+						>
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('ingresoMaterial') }}"
+									target="principal"
+								>
+									Ingresar Referencia
+								</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('modificarRefMeaterial') }}"
+									target="principal"
+								>
+									Modificar Referencia
+								</a>
+							</li>
+
+							<li>
+								<a
+									class="dropdown-item"
+									href="{{ url_for('consultarMaterial') }}"
+									target="principal"
+									>Consultar Referencia
+								</a>
+							</li>
+						</ul>
+					</div>
+				</td>
+			</table>
+		</aside>
+		<section>
+			<div class="form-space">
+				<td>
+					<!-- scrolling sirve para poner la barra para ver todo el contenido de la pagina -->
+					<iframe
+						name="principal"
+						src="{{ url_for('crearPedido') }}"
+						scrolling="auto"
+						title="Formulario"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					></iframe>
+				</td>
+			</div>
+		</section>
+	</body>
+</html>
+{% endblock %}

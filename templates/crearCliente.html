@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Crear Cliente</title>
+	</head>
+	<body>
+		<form>
+			<p>
+				<label for="primer-nombre">Primer Nombre:</label>
+				<input type="text" id="primer-nombre" /><br />
+				<label for="segundo-nombre">Segundo Nombre:</label>
+				<input type="text" id="segundo-nombre" /><br />
+				<label for="primer-apellido">Primer Apellido:</label>
+				<input type="text" id="primer-apellido" /><br />
+				<label for="segundo-apellido">Segundo Apellido:</label>
+				<input type="text" id="segundo-apellido" /><br />
+				
+                <div class="col-md-3">
+                    <label for="tipo-id">Tipo identificacion:</label>
+                    <select id="inputTurmaTurno" class="form-select">
+                      <option selected hidden>Tipode identificación</option>
+                      <option>CC</option>
+                      <option>NIT</option>
+                      <option>RUT</option>
+                    </select>
+                </div>
+                
+				<input type="radio" name="tipo-id" value="CC" />CC<br />
+                <input type="submit" value="Enviar"><input type="reset">
+			</p>
+		</form>
+	</body>
+</html>
