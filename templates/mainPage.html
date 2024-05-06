@@ -15,6 +15,109 @@
 						<h3>Panel de navegación</h3>
 					</div>
 					<div class="dropdown">
+						<ul class="navegacion">
+							<li class="btn btn-secondary" id="pedidos">
+								<a href="#pedidos" class="padre">
+									Pedidos
+									<label
+										class="label_hamburguesa"
+										for="menu_hamburguesa"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											fill="currentColor"
+											class="list_icon"
+											viewBox="0 0 16 16"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+											/>
+										</svg>
+									</label>
+									<input
+										class="menu_hamburguesa"
+										type="checkbox"
+										name=""
+										id="menu_hamburguesa"
+								/></a>
+								<div class="dropdown-menu">
+									<a
+										class="dropdown-item"
+										href="{{ url_for('crearPedido') }}"
+										target="principal"
+									>
+										Crear Pedido
+									</a>
+									<a
+										class="dropdown-item"
+										href="{{ url_for('modificarPedido') }}"
+										target="principal"
+									>
+										Modificar Pedido
+									</a>
+									<a
+										class="dropdown-item"
+										href="{{ url_for('consultarPedido') }}"
+										target="principal"
+										>Consultar Pedido
+									</a>
+								</div>
+							</li>
+							<li class="btn btn-secondary" id="materiales">
+								<a href="#materiales" class="padre">
+									Materiales
+									<label
+										class="label_hamburguesa"
+										for="menu_hamburguesa"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="16"
+											height="16"
+											fill="currentColor"
+											class="list_icon"
+											viewBox="0 0 16 16"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+											/>
+										</svg>
+									</label>
+									<input
+										class="menu_hamburguesa"
+										type="checkbox"
+										name=""
+										id="menu_hamburguesa"
+								/></a>
+								<div class="dropdown-menu">
+									<a
+										class="dropdown-item"
+										href="{{ url_for('crearPedido') }}"
+										target="principal"
+									>
+										Crear
+									</a>
+									<a
+										class="dropdown-item"
+										href="{{ url_for('modificarPedido') }}"
+										target="principal"
+									>
+										Modificar
+									</a>
+									<a
+										class="dropdown-item"
+										href="{{ url_for('consultarPedido') }}"
+										target="principal"
+										>Consultar
+									</a>
+								</div>
+							</li>
+						</ul>
+						<!--
 						<button
 							class="btn btn-secondary dropdown-toggle"
 							type="button"
@@ -49,7 +152,7 @@
 							class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="dropdownMenuButton1"
 						>
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('crearPedido') }}"
@@ -58,7 +161,7 @@
 									Crear Pedido
 								</a>
 							</li>
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('modificarPedido') }}"
@@ -68,7 +171,7 @@
 								</a>
 							</li>
 
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('consultarPedido') }}"
@@ -111,7 +214,7 @@
 							class="dropdown-menu dropdown-menu-dark"
 							aria-labelledby="dropdownMenuButton2"
 						>
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('ingresoMaterial') }}"
@@ -120,7 +223,7 @@
 									Ingresar Referencia
 								</a>
 							</li>
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('modificarRefMeaterial') }}"
@@ -130,7 +233,7 @@
 								</a>
 							</li>
 
-							<li>
+							<li class="enlace">
 								<a
 									class="dropdown-item"
 									href="{{ url_for('consultarMaterial') }}"
@@ -138,7 +241,7 @@
 									>Consultar Referencia
 								</a>
 							</li>
-						</ul>
+						</ul>-->
 					</div>
 				</td>
 			</table>

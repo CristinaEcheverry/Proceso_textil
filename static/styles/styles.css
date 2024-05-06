@@ -49,6 +49,21 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+ul {
+	list-style: none;
+	padding: 0.5%;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+.menu_hamburguesa {
+	display: none;
+	align-items: end;
+}
+
 #navbarSupportedContent {
 	display: inline;
 	align-content: center;
@@ -77,11 +92,12 @@ footer {
 	border-radius: 30px 30px 30px 30px;
 }
 
-.dropdown-menu > li > a > :hover {
+.dropdown-menu li a :hover > ul {
 	background-color: #daecf6;
 	color: black;
 	text-decoration: none;
 	transition: all 0.3s;
+	display: block;
 }
 
 iframe {
@@ -110,9 +126,13 @@ iframe {
 .form-group {
 	display: inline;
 }
-
+/*cuando es más pequeña la pagina poner estilos así
 @media screen and (max-width: 550px) {
 	.btn {
+		display: block;
+	}
+
+	.btn:target .dropdown-menu a {
 		display: block;
 	}
 
@@ -122,27 +142,47 @@ iframe {
 		padding: 2rem;
 		box-shadow: 0 0 0 10vmax rgba(0, 0, 0, 0.5);
 	}
+}*/
+
+.navegacion {
+	margin: 0 auto;
+	max-width: 90%;
+	display: flex;
+	flex-direction: column;
+}
+/* ayuda a poner las opciones en lista*/
+.navegacion a {
+	padding: 0.8%;
+	display: block;
 }
 
-.dropdown {
-}
 .btn {
-}
-.btn-secondary {
-}
-.dropdown-toggle {
+	flex: 1;
+	position: relative;
 }
 
-.menu_hamburguesa {
+.btn .dropdown-menu {
+	position: absolute;
+	width: 95%;
+}
+
+.btn:target .dropdown-menu {
+	max-height: auto;
+	display: block;
+}
+
+.dropdown-menu a {
 	display: none;
 }
-.label_hamburguesa {
+
+.btn:target .dropdown-menu a {
+	max-height: auto;
+	display: block;
 }
-.list_icon {
-}
+
 .dropdown-menu {
-}
-.dropdown-menu-dark {
-}
-.dropdown-item {
+	background-color: #fff;
+	max-height: 0;
+	display: ;
+	list-style: ;
 }
