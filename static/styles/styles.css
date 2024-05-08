@@ -183,6 +183,5 @@ iframe {
 .dropdown-menu {
 	background-color: #fff;
 	max-height: 0;
-	display: ;
-	list-style: ;
+	display: none;
 }
