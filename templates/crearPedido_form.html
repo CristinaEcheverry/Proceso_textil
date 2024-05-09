@@ -29,25 +29,45 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 			crossorigin="anonymous"
 		></script>
-		<head>
-			<h1 aling="center">Crear Pedido</h1>
-		</head>
 	</head>
 	<body>
+		<header>
+			<h1>Crear Pedido</h1>
+		</header>
 		<form>
 			<table class="fechas">
 				<thead>
 					<tr>
-						<th scope="col">Fecha del pedido</th>
-						<th scope="col">Fecha de recibido</th>
-						<th scope="col">Fecha del despacho</th>
+						<th type="col"></th>
+						<th type="row"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
+						<th id="numero-pedido">No. Pedido</th>
+						<td id="num-pedido"></td>
+					</tr>
+					<tr>
+						<th id="estados">Estado pedido</th>
+						<td>
+							<select name="estado-pedido" id="estado-pedido">
+								<option value="patronaje">Patronaje</option>
+								<option value="diseño">Diseño</option>
+								<option value="corte">Corte</option>
+								<option value="confeccion">Confección</option>
+								<option value="cerrado">Entregado</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">Fecha del pedido</th>
 						<td>
 							<input type="date" name="fechaPedido" id="fechaPedido" />
 						</td>
+					</tr>
+					<tr>
+						<th scope="row">Fecha de recibido</th>
+
 						<td>
 							<input
 								type="date"
@@ -55,6 +75,9 @@
 								id="fechaRecibido"
 							/>
 						</td>
+					</tr>
+					<tr>
+						<th scope="row">Fecha del despacho</th>
 						<td>
 							<input
 								type="date"
@@ -166,7 +189,7 @@
 					</td>
 				</tr>
 			</table>
-			<table class="tabla-pedidos">
+			<table class="tabla-pedidos scroll-auto">
 				<tr class="titulos">
 					<thead>
 						<th>#</th>
