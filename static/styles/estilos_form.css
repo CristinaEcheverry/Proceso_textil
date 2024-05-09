@@ -1,0 +1,48 @@
+body {
+	background-color: #edf6f9;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+	text-align: center;
+}
+
+.fechas {
+	float: right;
+	margin-right: 1%;
+}
+
+#num-pedido {
+	background-color: #ffcdb2;
+}
+
+.Formulario {
+	float: left;
+}
+
+.form-group {
+	display: inline;
+	margin: 1%;
+}
+
+.tabla-pedidos {
+	background-color: rebeccapurple;
+	margin: 10% 0.1%;
+}
+
+.scroll-auto {
+	-webkit-overflow-scrolling: auto;
+	-moz-overflow-scrolling: auto;
+	-o-overflow-scrolling: auto;
+	-ms-overflow-scrolling: auto;
+}
+
+.titulos {
+	background-color: gray;
+	text-align: center;
+}
+
+.totales {
+	background-color: grey;
+	float: right;
+}
