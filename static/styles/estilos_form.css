@@ -48,6 +48,7 @@ header {
 .tabla td {
 	padding: 12px 15px;
 }
+
 /* configura las filas */
 .tabla tbody tr {
 	border-bottom: 1px solid #dddddd;
@@ -55,11 +56,6 @@ header {
 .tabla tbody tr:nth-of-type(even) {
 	background-color: #f3f3f3;
 }
-
-/* .tabla-pedidos {
-	background-color: rebeccapurple;
-	margin: 10% 0.1%;
-} */
 
 .scroll-auto {
 	-webkit-overflow-scrolling: auto;
