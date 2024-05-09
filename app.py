@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-#app.config ["SQLALCHEMY_DATABASE_URI"] - 'mysql//Proceso_textil.db'
+#app.config ["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:Mg52744319@localhost/fashionprocess'
 
 #db=SQLAlchemy(app)
 
