@@ -5,246 +5,195 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 		<link rel="stylesheet" href="/static/styles/styles.css" />
 	</head>
 	<body>
-		<aside id="panel_navegation">
-			<table class="tabla" width="100%">
-				<td>
-					<div class="box-txt">
-						<h3>Panel de navegación</h3>
-					</div>
-					<div class="dropdown">
-						<ul class="navegacion">
-							<li class="btn btn-secondary" id="pedidos">
-								<a href="#pedidos" class="padre">
-									Pedidos
-									<label
-										class="label_hamburguesa"
-										for="menu_hamburguesa"
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											fill="currentColor"
-											class="list_icon"
-											viewBox="0 0 16 16"
-										>
-											<path
-												fill-rule="evenodd"
-												d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-											/>
-										</svg>
-									</label>
-									<input
-										class="menu_hamburguesa"
-										type="checkbox"
-										name=""
-										id="menu_hamburguesa"
-								/></a>
-								<div class="dropdown-menu">
-									<a
-										class="dropdown-item"
-										href="{{ url_for('crearPedido') }}"
-										target="principal"
-									>
-										Crear Pedido
-									</a>
-									<a
-										class="dropdown-item"
-										href="{{ url_for('modificarPedido') }}"
-										target="principal"
-									>
-										Modificar Pedido
-									</a>
-									<a
-										class="dropdown-item"
-										href="{{ url_for('consultarPedido') }}"
-										target="principal"
-										>Consultar Pedido
-									</a>
-								</div>
-							</li>
-							<li class="btn btn-secondary" id="materiales">
-								<a href="#materiales" class="padre">
-									Materiales
-									<label
-										class="label_hamburguesa"
-										for="menu_hamburguesa"
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											fill="currentColor"
-											class="list_icon"
-											viewBox="0 0 16 16"
-										>
-											<path
-												fill-rule="evenodd"
-												d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-											/>
-										</svg>
-									</label>
-									<input
-										class="menu_hamburguesa"
-										type="checkbox"
-										name=""
-										id="menu_hamburguesa"
-								/></a>
-								<div class="dropdown-menu">
-									<a
-										class="dropdown-item"
-										href="{{ url_for('crearPedido') }}"
-										target="principal"
-									>
-										Crear
-									</a>
-									<a
-										class="dropdown-item"
-										href="{{ url_for('modificarPedido') }}"
-										target="principal"
-									>
-										Modificar
-									</a>
-									<a
-										class="dropdown-item"
-										href="{{ url_for('consultarPedido') }}"
-										target="principal"
-										>Consultar
-									</a>
-								</div>
-							</li>
-						</ul>
-						<!--
-						<button
-							class="btn btn-secondary dropdown-toggle"
-							type="button"
-							id="dropdownMenuButton1"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							Pedido
-							<label class="label_hamburguesa" for="menu_hamburguesa"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									class="list_icon"
-									viewBox="0 0 16 16"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-									/>
-								</svg>
-							</label>
-							<input
-								class="menu_hamburguesa"
-								type="checkbox"
-								name=""
-								id="menu_hamburguesa"
-							/>
-						</button>
-						<ul
-							class="dropdown-menu dropdown-menu-dark"
-							aria-labelledby="dropdownMenuButton1"
-						>
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('crearPedido') }}"
-									target="principal"
-								>
-									Crear Pedido
-								</a>
-							</li>
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('modificarPedido') }}"
-									target="principal"
-								>
-									Modificar Pedido
-								</a>
-							</li>
+		<aside class="container" id="panel_navegation">
+			<h3 class="titulo">Panel de Navegación</h3>
+			<ul id="continer-nav">
+				<li class="opciones">
+					Pedido
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('crearPedido') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('modificarPedido') }}"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('consultarPedido') }}"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="opciones">
+					Material
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
 
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('consultarPedido') }}"
-									target="principal"
-									>Consultar Pedido
-								</a>
-							</li>
-						</ul>
-						<button
-							class="btn btn-secondary dropdown-toggle"
-							type="button"
-							id="dropdownMenuButton2"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							Materiales
-							<label class="label_hamburguesa" for="menu_hamburguesa"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="16"
-									height="16"
-									fill="currentColor"
-									class="list_icon"
-									viewBox="0 0 16 16"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-									/>
-								</svg>
-							</label>
-							<input
-								class="menu_hamburguesa"
-								type="checkbox"
-								name=""
-								id="menu_hamburguesa"
-							/>
-						</button>
-						<ul
-							class="dropdown-menu dropdown-menu-dark"
-							aria-labelledby="dropdownMenuButton2"
-						>
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('ingresoMaterial') }}"
-									target="principal"
-								>
-									Ingresar Referencia
-								</a>
-							</li>
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('modificarRefMeaterial') }}"
-									target="principal"
-								>
-									Modificar Referencia
-								</a>
-							</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('modificarRefMeaterial') }}"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('consultarMaterial') }}"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="opciones">
+					Despachos
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
 
-							<li class="enlace">
-								<a
-									class="dropdown-item"
-									href="{{ url_for('consultarMaterial') }}"
-									target="principal"
-									>Consultar Referencia
-								</a>
-							</li>
-						</ul>-->
-					</div>
-				</td>
-			</table>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('modificarRefMeaterial') }}"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('consultarMaterial') }}"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="opciones">
+					Clientes
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('modificarRefMeaterial') }}"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('consultarMaterial') }}"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="opciones">
+					Usuarios
+					<!-- aqui tiene que apareces una nombre del usuario -->
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('modificarRefMeaterial') }}"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('consultarMaterial') }}"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</aside>
 		<section>
 			<div class="form-space">
