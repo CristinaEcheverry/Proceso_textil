@@ -1,4 +1,5 @@
 body {
+	padding: 1%;
 	background-color: #edf6f9;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -25,10 +26,40 @@ header {
 	margin: 1%;
 }
 
-.tabla-pedidos {
+/* estilos de la tabla */
+.tabla {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 1em;
+	font-family: sans-serif;
+	min-width: 450px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* configura las celdas de encabezado */
+.tabla thead tr {
+	background-color: #6d6875;
+	color: #ffffff;
+	text-align: middle;
+}
+
+/* configura el resto de celdas */
+.tabla th,
+.tabla td {
+	padding: 12px 15px;
+}
+/* configura las filas */
+.tabla tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+.tabla tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+/* .tabla-pedidos {
 	background-color: rebeccapurple;
 	margin: 10% 0.1%;
-}
+} */
 
 .scroll-auto {
 	-webkit-overflow-scrolling: auto;
@@ -43,6 +74,6 @@ header {
 }
 
 .totales {
-	background-color: grey;
+	margin: 0.5% 1%;
 	float: right;
 }
