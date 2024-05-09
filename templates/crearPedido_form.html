@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="Formulario crear pedido" />
@@ -95,7 +95,7 @@
 							<label class="form-group">Nombre o Razón Social</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput"
 								placeholder="Example input"
 							/>
@@ -106,7 +106,7 @@
 							<label class="form-group">Dirección</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput2"
 								placeholder="Another input"
 							/>
@@ -133,7 +133,7 @@
 							<label class="form-group">Número Identificación</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput2"
 								placeholder="Another input"
 							/>
@@ -146,7 +146,7 @@
 							<label class="form-group">Telefono</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput"
 								placeholder="Example input"
 							/>
@@ -156,8 +156,8 @@
 						<div class="form-group">
 							<label class="form-group">Correo Electronico</label>
 							<input
-								type="text"
-								class="Formulario"
+								type="email"
+								class="info"
 								id="formGroupExampleInput2"
 								placeholder="Another input"
 							/>
@@ -170,7 +170,7 @@
 							<label class="form-group">Referencia</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput"
 								placeholder="Example input"
 							/>
@@ -181,7 +181,7 @@
 							<label class="form-group">Ciudad</label>
 							<input
 								type="text"
-								class="Formulario"
+								class="info"
 								id="formGroupExampleInput2"
 								placeholder="Another input"
 							/>
@@ -189,37 +189,54 @@
 					</td>
 				</tr>
 			</table>
-			<table class="tabla-pedidos scroll-auto">
-				<tr class="titulos">
-					<thead>
+			<table class="tabla scroll-auto">
+				<tr>
+					<thead class="titulos">
 						<th>#</th>
 						<th>Cod Artículo</th>
 						<th>Descripción</th>
 						<th>Cantidad en metros</th>
-						<th>Cantidad unidades</th>
+						<th>Cantidad prendas</th>
 						<th>Valor Unitario</th>
 						<th>Total</th>
 					</thead>
 					<tbody>
 						<tr>
 							<th scope="row">1</th>
-							<td><input type="text" value="articulo" /></td>
-							<td><input type="text" value="descripcion" /></td>
-							<td><input type="text" value="cant-en-metros" /></td>
-							<td><input type="text" value="cant-en-unidades" /></td>
-							<td><input type="text" value="valor-unitario" /></td>
+							<td><input type="text" value="" /></td>
+							<td><input type="text" value="" /></td>
+							<td><input type="number" value="0" /></td>
+							<td><input type="number" value="0" /></td>
+							<td><input type="number" value="$ 0.0" /></td>
+							<td id="total"></td>
 						</tr>
 						<tr>
 							<th scope="row">2</th>
-							<td><input type="text" value="articulo" /></td>
-							<td><input type="text" value="descripcion" /></td>
-							<td><input type="text" value="cant-en-metros" /></td>
-							<td><input type="text" value="cant-en-unidades" /></td>
-							<td><input type="text" value="valor-unitario" /></td>
+							<td><input type="text" value="" /></td>
+							<td><input type="text" value="" /></td>
+							<td><input type="number" value="0" /></td>
+							<td><input type="number" value="0" /></td>
+							<td><input type="number" value="$ 0.0" /></td>
+							<td id="total"></td>
 						</tr>
 					</tbody>
 				</tr>
 			</table>
+			<table>
+				<tr>
+					<td>
+						<div class="form-group">
+							<label class="form-group">Observaciones</label>
+							<textarea
+								class="info"
+								id="formGroupExampleInput"
+								placeholder="Example input"
+							></textarea>
+						</div>
+					</td>
+				</tr>
+			</table>
+
 			<table class="totales">
 				<thead>
 					<th></th>
@@ -228,23 +245,28 @@
 				<tbody>
 					<tr>
 						<th>IVA</th>
-						<td></td>
+						<td>$ 0.0</td>
 					</tr>
 					<tr>
 						<th>Descuentos</th>
-						<td></td>
+						<td>$ 0.0</td>
 					</tr>
 					<tr>
 						<th>Subtotal</th>
-						<td></td>
+						<td>$ 0.0</td>
+					</tr>
+					<tr>
+						<th>Anticipo</th>
+						<td>$ 0.0</td>
 					</tr>
 					<tr>
 						<th>Total</th>
-						<td></td>
+						<td>$ 0.0</td>
 					</tr>
 				</tbody>
 			</table>
 			<input type="submit" value="Enviar" class="Formulario" />
+			<input type="submit" value="Cancelar" class="Formulario" />
 		</form>
 	</body>
 </html>
