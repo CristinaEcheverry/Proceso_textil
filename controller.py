@@ -34,3 +34,7 @@ def modificarRefMeaterial():
 @app.route("/consultarMaterial")
 def consultarMaterial():
     return render_template("consultarMaterial_form.html", title= "Consultar Material")
+    
+@app.route("/crearCliente")
+def crearCliente():
+    return render_template("crearCliente.html", title= "CrearCliente")
