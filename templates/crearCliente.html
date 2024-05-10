@@ -3,33 +3,81 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Crear Cliente</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles/estilos_form.css') }}"
+		/>		
 	</head>
 	<body>
-		<form>
-			<p>
-				<label for="primer-nombre">Primer Nombre:</label>
-				<input type="text" id="primer-nombre" /><br />
-				<label for="segundo-nombre">Segundo Nombre:</label>
-				<input type="text" id="segundo-nombre" /><br />
-				<label for="primer-apellido">Primer Apellido:</label>
-				<input type="text" id="primer-apellido" /><br />
-				<label for="segundo-apellido">Segundo Apellido:</label>
-				<input type="text" id="segundo-apellido" /><br />
-				
-                <div class="col-md-3">
-                    <label for="tipo-id">Tipo identificacion:</label>
-                    <select id="inputTurmaTurno" class="form-select">
-                      <option selected hidden>Tipode identificación</option>
-                      <option>CC</option>
-                      <option>NIT</option>
-                      <option>RUT</option>
-                    </select>
-                </div>
-                
-				<input type="radio" name="tipo-id" value="CC" />CC<br />
-                <input type="submit" value="Enviar"><input type="reset">
-			</p>
-		</form>
+		<header>
+			<h1>Crear Cliente</h1>
+		</header>
+		<section>
+			<div class="contenido">
+				<div class="Formulario">
+					<form action="" method="post">
+						<h4>Información de contacto</h4>
+						<label for="primer-nombre">Primer Nombre:</label>
+						<input type="text" id="primer-nombre" /><br />
+						<label for="segundo-nombre">Segundo Nombre:</label>
+						<input type="text" id="segundo-nombre" /><br />
+						<label for="primer-apellido">Primer Apellido:</label>
+						<input type="text" id="primer-apellido" /><br />
+						<label for="segundo-apellido">Segundo Apellido:</label>
+						<input type="text" id="segundo-apellido" /><br />
+						<label for="cargo">Cargo:</label>
+						<input type="text" id="cargo" /><br />
+						<label for="area">Area:</label>
+						<input type="text" id="area" /><br />
+			
+						<label for="tipo-id">Tipo identificacion:</label>
+							<select id="inputTurmaTurno" class="form-select">
+								<option value="CC">CC</option>
+								<option value="CE">CE</option>
+								<option value="NIT">NIT</option>
+								<option value="RUT">RUT</option>
+							</select>
+						<label for="numero-id">Número identificación:</label>
+						<input type="text" id="numero-id" /><br />
+					</form>
+				</div>
+				<div class="Formulario">
+					<form action="" method="post">
+						
+						<h4>Información de la empresa</h4>
+						<label for="nombre-empresa">Nombre de la empresa:</label>
+						<input type="text" id="nombre-empresa" /><br />
+						<label for="tipo-id" aria-placeholder="CC">Tipo identificacion:</label>
+							<select id="inputTurmaTurno" class="form-select">
+								<option value="CC">CC</option>
+								<option value="CE">CE</option>
+								<option value="NIT">NIT</option>
+								<option value="RUT">RUT</option>
+							</select>
+						<label for="numero-id">Número identificación:</label>
+						<input type="text" id="numero-id" /><br />
+						<label for="direccion">Dirección:</label>
+						<input type="text" id="direccion" /><br />
+						<label for="telefono">Teléfono:</label>
+						<input type="text" id="telefono" /><br />
+						<label for="correo">Correo:</label>
+						<input type="email" id="correo" /><br />
+						<label for="ciudad">Ciudad:</label>
+						<input type="text" id="ciudad" /><br />
+						<label for="departamento">Departamento:</label>
+						<input type="text" id="departamento" /><br />
+						<label for="pais">País:</label>
+						<input type="text" id="pais" /><br />
+						<label for="codigo-postal">Código Postal:</label>
+						<input type="text" id="codigo-postal" /><br />
+					</form>
+				</div>
+			</div>
+			<label for="observaciones">Observaciones:</label>
+			<textarea id="observaciones" placeholder="Anota algo"></textarea><br />					
+			<input type="submit" value="Guardar">
+			<input type="submit" value="Crear nuevo">
+		<!-- <input type="radio" name="tipo-id" value="CC" />CC<br /> -->
+		
 	</body>
 </html>
