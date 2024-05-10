@@ -34,239 +34,183 @@
 		<header>
 			<h1>Crear Pedido</h1>
 		</header>
-		<form>
-			<table class="fechas">
-				<thead>
-					<tr>
-						<th type="col"></th>
-						<th type="row"></th>
-					</tr>
+		<div class="contenido">
+			<div class="Formulario">
+				<form action="" method="post">
+					<label class="form-group">Nombre o Razón Social</label>
+					<input
+						type="text"
+						class="info"
+						id="formGroupExampleInput"
+						placeholder="Example input"
+					/>
+					<br />
+					<label class="form-group">Dirección</label>
+					<input
+						type="text"
+						class="info"
+						id="formGroupExampleInput2"
+						placeholder="Another input"
+					/>
+					<br />
+					<label for="lang">Tipo Identificación</label>
+					<select name="lenguajes" id="lang">
+						<option value="javascript">CC</option>
+						<option value="php">TI</option>
+						<option value="java">NIT</option>
+						<option value="java">CE</option>
+						<option value="java">PAS</option>
+					</select>
+					<label class="form-group">Número Identificación</label>
+					<input
+						type="text"
+						class="info"
+						id="formGroupExampleInput2"
+						placeholder="Another input"
+					/>
+					<br />
+					<label class="form-group">Telefono</label>
+					<input
+						type="text"
+						class="info"
+						id="formGroupExampleInput"
+						placeholder="Example input"
+					/>
+					<br />
+					<label class="form-group">Correo Electronico</label>
+					<input
+						type="email"
+						class="info"
+						id="formGroupExampleInput2"
+						placeholder="Another input"
+					/>
+					<br />
+					<label class="form-group">Ciudad</label>
+					<input
+						type="text"
+						class="info"
+						id="formGroupExampleInput2"
+						placeholder="Another input"
+					/>
+				</form>
+			</div>
+			<div class="fechas">
+				<label class="form-group" for="num-pedido">No. Pedido</label>
+				<input type="text" class="info" id="num-pedido" name="num-pedido" />
+				<br /><br />
+				<form action="" method="post">
+					<label class="form-group" for="estados">Estado Pedido</label>
+					<select name="estado-pedido" id="estado-pedido">
+						<option value="patronaje">Patronaje</option>
+						<option value="diseño">Diseño</option>
+						<option value="corte">Corte</option>
+						<option value="confeccion">Confección</option>
+						<option value="cerrado">Entregado</option>
+					</select>
+					<br /><br />
+					<label class="form-group" for="fechaPedido"
+						>Fecha del pedido:</label
+					>
+					<input
+						type="date"
+						class="info"
+						id="fechaPedido"
+						name="fechaPedido"
+					/><br /><br />
+					<label class="form-group" for="fechaRecibido"
+						>Fecha del documento:</label
+					>
+					<input
+						type="date"
+						class="info"
+						id="fechaRecibido"
+						name="fechaRecibido"
+					/><br /><br />
+					<label class="form-group" for="fechaDespacho"
+						>Fecha de despacho:</label
+					>
+					<input type="date" id="fechaDespacho" name="fechaDespacho" />
+				</form>
+			</div>
+		</div>
+		<h2>Tabla de Pedidos</h2>
+		<table class="tabla scroll-auto">
+			<tr>
+				<thead class="titulos">
+					<th>#</th>
+					<th>Cod Artículo</th>
+					<th>Descripción</th>
+					<th>Cantidad en metros</th>
+					<th>Cantidad prendas</th>
+					<th>Valor Unitario</th>
+					<th>Total</th>
 				</thead>
 				<tbody>
 					<tr>
-						<th id="numero-pedido">No. Pedido</th>
-						<td id="num-pedido"></td>
+						<th scope="row">1</th>
+						<td><input type="text" value="" /></td>
+						<td><input type="text" value="" /></td>
+						<td><input type="number" value="0" /></td>
+						<td><input type="number" value="0" /></td>
+						<td><input type="number" value="$ 0.0" /></td>
+						<td id="total"></td>
 					</tr>
 					<tr>
-						<th id="estados">Estado pedido</th>
-						<td>
-							<select name="estado-pedido" id="estado-pedido">
-								<option value="patronaje">Patronaje</option>
-								<option value="diseño">Diseño</option>
-								<option value="corte">Corte</option>
-								<option value="confeccion">Confección</option>
-								<option value="cerrado">Entregado</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">Fecha del pedido</th>
-						<td>
-							<input type="date" name="fechaPedido" id="fechaPedido" />
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">Fecha de recibido</th>
-
-						<td>
-							<input
-								type="date"
-								name="fechaRecibido"
-								id="fechaRecibido"
-							/>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">Fecha del despacho</th>
-						<td>
-							<input
-								type="date"
-								name="fechaDespacho"
-								id="fechaDespacho"
-							/>
-						</td>
+						<th scope="row">2</th>
+						<td><input type="text" value="" /></td>
+						<td><input type="text" value="" /></td>
+						<td><input type="number" value="0" /></td>
+						<td><input type="number" value="0" /></td>
+						<td><input type="number" value="$ 0.0" /></td>
+						<td id="total"></td>
 					</tr>
 				</tbody>
-			</table>
-			<table class="Formulario">
+			</tr>
+		</table>
+		<table class="totales">
+			<thead>
+				<th></th>
+				<th></th>
+			</thead>
+			<tbody>
 				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Nombre o Razón Social</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Dirección</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
+					<th>IVA</th>
+					<td>$ 0.0</td>
 				</tr>
 				<tr>
-					<td>
-						<div class="form-group">
-							<form action="#">
-								<label for="lang">Tipo Identificación</label>
-								<select name="lenguajes" id="lang">
-									<option value="javascript">CC</option>
-									<option value="php">TI</option>
-									<option value="java">NIT</option>
-									<option value="java">CE</option>
-									<option value="java">PAS</option>
-								</select>
-							</form>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Número Identificación</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
+					<th>Descuentos</th>
+					<td>$ 0.0</td>
 				</tr>
 				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Telefono</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Correo Electronico</label>
-							<input
-								type="email"
-								class="info"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
+					<th>Subtotal</th>
+					<td>$ 0.0</td>
 				</tr>
 				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Referencia</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Ciudad</label>
-							<input
-								type="text"
-								class="info"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
+					<th>Anticipo</th>
+					<td>$ 0.0</td>
 				</tr>
-			</table>
-			<table class="tabla scroll-auto">
 				<tr>
-					<thead class="titulos">
-						<th>#</th>
-						<th>Cod Artículo</th>
-						<th>Descripción</th>
-						<th>Cantidad en metros</th>
-						<th>Cantidad prendas</th>
-						<th>Valor Unitario</th>
-						<th>Total</th>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td><input type="text" value="" /></td>
-							<td><input type="text" value="" /></td>
-							<td><input type="number" value="0" /></td>
-							<td><input type="number" value="0" /></td>
-							<td><input type="number" value="$ 0.0" /></td>
-							<td id="total"></td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td><input type="text" value="" /></td>
-							<td><input type="text" value="" /></td>
-							<td><input type="number" value="0" /></td>
-							<td><input type="number" value="0" /></td>
-							<td><input type="number" value="$ 0.0" /></td>
-							<td id="total"></td>
-						</tr>
-					</tbody>
+					<th>Total</th>
+					<td>$ 0.0</td>
 				</tr>
-			</table>
-			<table>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Observaciones</label>
-							<textarea
-								class="info"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							></textarea>
-						</div>
-					</td>
-				</tr>
-			</table>
+			</tbody>
+		</table>
+		<table>
+			<tr>
+				<td>
+					<div class="form-group">
+						<label class="form-group">Observaciones</label>
+						<textarea
+							class="info"
+							id="formGroupExampleInput"
+							placeholder="Example input"
+						></textarea>
+					</div>
+				</td>
+			</tr>
+		</table>
 
-			<table class="totales">
-				<thead>
-					<th></th>
-					<th></th>
-				</thead>
-				<tbody>
-					<tr>
-						<th>IVA</th>
-						<td>$ 0.0</td>
-					</tr>
-					<tr>
-						<th>Descuentos</th>
-						<td>$ 0.0</td>
-					</tr>
-					<tr>
-						<th>Subtotal</th>
-						<td>$ 0.0</td>
-					</tr>
-					<tr>
-						<th>Anticipo</th>
-						<td>$ 0.0</td>
-					</tr>
-					<tr>
-						<th>Total</th>
-						<td>$ 0.0</td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" value="Enviar" class="Formulario" />
-			<input type="submit" value="Cancelar" class="Formulario" />
-		</form>
+		<input type="submit" value="Enviar" class="Formulario" />
+		<input type="submit" value="Cancelar" class="Formulario" />
 	</body>
 </html>
