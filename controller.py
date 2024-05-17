@@ -39,3 +39,36 @@ def consultarMaterial():
 @app.route("/crearCliente")
 def crearCliente():
     return render_template("crearCliente.html", title= "CrearCliente")
+
+
+@app.route("/crearTipoPrenda", methods=['GET','POST'])
+def crearTipoPrenda():
+    if request.method == 'POST':
+        tipo_prenda = request.form.get('tipo_prenda')
+        prenda = request.form.get('prenda')
+        tipo_prenda = TipoPrenda(tipo_prenda,prenda)
+        TipoPrenda.agregar_tipo_prenda(tipo_prenda)
+        return redirect(url_for('tipo_prenda'))
+    prenda = Prenda.obtener_prenda()
+    return render_template("crearTipoPrenda.html", prenda=prenda)
+
+@app.route("/tipo_prenda")
+def tipo_prenda():
+    tipo_prenda = TipoPrenda.obtener_tipo_prenda()
+    return render_template("tipo_prenda.html",tipo_prenda=tipo_prenda)
+
+@app.route("/crearPrenda", methods=['GET','POST'])
+def crearPrenda():
+    if request.method == 'POST': #si la info que llega viene de un formulario guardarlo en la db
+        prenda = request.form.get('prenda')
+        tipo_prenda = request.form.get('tipo_prenda')
+        prenda = Prenda(prenda,tipo_prenda)
+        Prenda.agregar_prenda(prenda)
+        return redirect(url_for('prendas'))
+    tipo_prenda = TipoPrenda.obtener_tipo_prenda()
+    return render_template("crearPrenda.html", tipo_prenda=tipo_prenda)
+
+@app.route("/prendas")
+def prendas():
+    prendas = Prenda.obtener_prenda()
+    return render_template("prendas.html",prendas=prendas)
