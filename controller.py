@@ -1,6 +1,7 @@
 from app import app
-# from model import * -> Aquí se tiene que importar todos los modelos o clases
-from flask import render_template  # render_template es para usar las vistas
+from model import TipoPrenda, Prenda # Aquí se tiene que importar todos los modelos o clases
+from flask import render_template, request, redirect, url_for  # render_template es para usar las vistas
+
 
 @app.route("/") # El "/" -> hace referencia a la pagna de inicio
 def index():
@@ -38,20 +39,3 @@ def consultarMaterial():
 @app.route("/crearCliente")
 def crearCliente():
     return render_template("crearCliente.html", title= "CrearCliente")
-
-
-# agregar información a la base de datos
-# @app.route("/addCliente", methods=["POST", "GET"])
-# def addCliente():
-#     if request.method == "POST":
-#         nombre = request.form["nombre"]
-#         tipo_identificacion = request.form["tipo_identificacion"]
-#         numero_identificacion = request.form["numero_identificacion"]
-#         direccion = request.form["direccion"]
-#         telefono = request.form["telefono"]
-        
-        # cliente = Clientes(nombre=nombre, tipo_identificacion=tipo_identificacion, numero_identificacion=numero_identificacion, direccion=direccion, telefono=telefono)
-        # db.session.add(cliente)
-        # db.session.commit()
-        
-        # return redirect(url_for("crearCliente"))
