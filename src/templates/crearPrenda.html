@@ -1,0 +1,17 @@
+{% extends 'barraNavegacion.html' %} {% block title %}Crear prenda{% endblock %}
+{% block content %}
+<h1>Crear prenda</h1>
+
+<form method="post" action="crear-prenda">
+	{% for prenda in prenda %}
+	<label for="nombre">Nombre de la prenda:</label>
+	<input
+		type="text"
+		id="nombre"
+		name="nombre"
+		value="{{prenda.id}}"
+		required
+	/>{{prenda.nombre}} {% endfor %}
+	<input type="submit" value="Enviar" />
+</form>
+{% endblock %}
