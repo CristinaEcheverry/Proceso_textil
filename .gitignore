@@ -6,6 +6,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.venv/Lib/
+.venv/Scripts/
+.venv/pyvenv.cfg
+.venv/*
 
 # ignorar archivos de configuración
 __pycache__/
