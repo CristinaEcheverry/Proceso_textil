@@ -6,12 +6,6 @@ class TipoPrenda(Base):
     id = Column(Integer(), primary_key=True)
     tipo_prenda = Column(String(30), unique=True, nullable=False)
     prenda = Column(String(30), ForeignKey('prenda.prenda'),nullable=False)
-    # id = Column(Integer, primary_key=True)
-    # descripcion = Column(String(300), unique=True, nullable=False)
-    # unidad_medida = Column(String(3), unique=False, nullable=False)
-    # cantidad_stock = Column(Integer, unique=False, nullable=False)
-    # valor_unitario = Column(Float(10,8))
-    # categoria = Column(Integer, ForeignKey('categorias.id'),nullable=False)
 
     def __init__(self, tipo_prenda, prenda):
         self.tipo_prenda = tipo_prenda
@@ -26,4 +20,22 @@ class TipoPrenda(Base):
     def obtener_tipo_prenda():
         session = Session()
         tipo_prenda = session.query(TipoPrenda).all()
+        return tipo_prenda
+    
+    def obtener_tipo_prenda_por_id(id):
+        session = Session()
+        tipo_prenda = session.query(TipoPrenda).get(id)
+        return tipo_prenda
+    
+    def actualizar_tipo_prenda(id, tipo_prenda):
+        session = Session()
+        tipo_prenda = session.query(TipoPrenda).get(id)
+        session.commit()
+        return tipo_prenda
+    
+    def eliminar_tipo_prenda(id):
+        session = Session()
+        tipo_prenda = session.query(TipoPrenda).get(id)
+        session.delete(tipo_prenda)
+        session.commit()
         return tipo_prenda

@@ -3,9 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Crear Prenda</title>
 	</head>
 	<body>
-		<form action="" method="post"></form>
+		<header>
+			<h1>Crear Prenda</h1>
+		</header>
+		<form action="agregar_tipo_prenda" method="post">
+			<label for="tipo">Tipo de Prenda</label>
+			<input type="text" id="tipo" name="tipo" />
+			<br />
+			<label for="descripcion">Descripción</label>
+			<input type="text" id="descripcion" name="descripcion" />
+			<button type="submit">Crear Prenda</button>
+		</form>
 	</body>
 </html>
