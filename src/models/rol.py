@@ -1,9 +1,9 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, SmallInteger, String
 from src.models import Base, Session
 
 class Rol(Base):
     __annotations__ = 'rol'
-    id = Column(Integer, primary_key=True)
+    id = Column(SmallInteger, primary_key=True)
     descripcion = Column(String(30), unique=True, nullable=False )
 
     def __init__(self, descripcion):

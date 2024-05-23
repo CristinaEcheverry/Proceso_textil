@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, SmallInteger, Date, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, Date
 from src.models import Base, Session
 
 class Pedido(Base):

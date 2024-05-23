@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float, SmallInteger, Date, DateTime
+from sqlalchemy import Column, String, SmallInteger
 from src.models import Base, Session
 
 class EstadoMaterial(Base):

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, SmallInteger, Date
+from sqlalchemy import Column, Integer, ForeignKey, Date
 from src.models import Base, Session
 
 class Despacho(Base):

@@ -1,9 +1,9 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, SmallInteger, String,ForeignKey
 from src.models import Base, Session
 
 class TipoPrenda(Base):
     __tablename__ = "tipo_prenda"
-    id = Column(Integer(), primary_key=True)
+    id = Column(SmallInteger, primary_key=True)
     tipo_prenda = Column(String(30), unique=True, nullable=False)
     prenda = Column(String(30), ForeignKey('prenda.prenda'),nullable=False)
 

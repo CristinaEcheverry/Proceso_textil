@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String
 from src.models import Base, Session
 
 class EstadoPedido(Base):

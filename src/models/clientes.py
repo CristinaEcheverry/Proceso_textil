@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, SmallInteger
+from sqlalchemy import Column, String, ForeignKey, SmallInteger
 from src.models import Base, Session
 
 class Cliente(Base):

@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, SmallInteger, String, Enum
 from src.models import Base, Session
 
 class TipoIdentificacion(Base):
     __tablename__ = 'tipo_identificacion'
-    id = Column(Integer, primary_key=True)
-    tipo_identificacion = Column(String(3))
-    descripcion = Column(String(50))
+    id = Column(SmallInteger, primary_key=True)
+    tipo_identificacion = Column(Enum('CC', 'CE', 'TI','PA', 'NIT', 'RUT', 'OTRO'))
+    descripcion = Column(String(40))
     
     def __init__(self, tipo_identificacion, descripcion):
         self.tipo_identificacion = tipo_identificacion
