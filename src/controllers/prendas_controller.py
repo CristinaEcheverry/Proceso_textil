@@ -1,4 +1,4 @@
-from app import app
+from src.app import app
 from src.models.prendas import Prenda
 from src.models.tipo_prenda import TipoPrenda # Aquí se tiene que importar todos los modelos o clases
 from flask import render_template, request, redirect, url_for  # render_template es para usar las vistas

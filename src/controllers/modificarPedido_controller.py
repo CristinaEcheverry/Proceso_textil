@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for  # render_template es para usar las vistas
-from app import app
+from src.app import app
 from flask_controller import FlaskController
 
 
