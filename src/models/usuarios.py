@@ -1,7 +1,10 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, SmallInteger, Date
 from src.models import Base, Session
 
-class Usuarios(Base):
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+
+class Usuarios(Base, UserMixin):
     __tablename__ = 'usuarios'
     id = Column(Integer, primary_key=True)
     username = Column(String(45), nullable=False)
@@ -81,4 +84,11 @@ class Usuarios(Base):
         session.query(Usuarios).filter_by(id=self.id).delete()
         session.commit()
         session.close()
-        
+
+
+    @classmethod
+    def check_password(self, hashed_password,password):
+        return check_password_hash(hashed_password, password)
+    
+# print(generate_password_hash('1234Jk')) # para generar la contraseña encriptada
+

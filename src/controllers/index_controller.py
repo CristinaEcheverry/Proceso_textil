@@ -1,44 +1,59 @@
-from flask import render_template, request, redirect, url_for  # render_template es para usar las vistas
-from src.app import app
+from flask import render_template, request, redirect, url_for, flash  # render_template es para usar las vistas
+from src.app import app, engine
 from src.models.usuarios import Usuarios
+from src.models.Model_user import ModelUser
 from flask_controller import FlaskController
+from flask_login import LoginManager, login_user, login_required, logout_user
 
 
 class IndexController(FlaskController):
     def __init__(self):
         super().__init__()
 
+
+    @LoginManager.usuarios_loader
+    def load_user(id):
+        return ModelUser.obtener_usuario_por_id(engine, id)
+
+    @app.route("/")
     def index():
         #Aqui puedo agregar procesos
-        return render_template("index.html", title= "Proceso textil") # el primer argumento es el que llama a la vista o template, el 2° argumento es el parametro que se traslada 
+        return redirect(url_for('login')) # el primer argumento es el que llama a la vista o template, el 2° argumento es el parametro que se traslada 
 
+    @app.route("/login", methods=["GET", "POST"])
     def login():
+        if request.method == "POST":            
+            usuario = Usuarios(request.form["usuario"], request.form["password"])
+            usuario_login = ModelUser.login(engine, usuario)
+            if usuario_login != None:
+                if usuario_login.password:
+                    login_user(usuario_login)
+                    return redirect(url_for("mainPage"))
+                else:
+                    flash("Contraseña incorrecta")
+                    return redirect(url_for("index"))
+            else:
+                flash("Usuario no encontrado")
+                return redirect(url_for("index"))
         return render_template("login.html", title= "Iniciar sesión")
     
-    def registro():
-        return render_template("registro.html", title= "Registro")
+
+    @app.route("/cerrar_sesion")
+    def cerrar_sesion():
+        logout_user()
+        return redirect(url_for("index"))
     
-    def recuperarContrasena():
-        return render_template("recuperarContrasena.html", title= "Recuperar contraseña")
-    
-    def recuperarUsuario():
-        return render_template("recuperarUsuario.html", title= "Recuperar usuario")
+    # ejemplo proteger una ruta
+    @app.route("/protected")
+    @login_required
+    def protected():
+        return "<h1> Protected route</h1>"
     
     # funcion con try para los mensajes de error
-    
 
-    # def error404():
-    #     return render_template("error404.html", title= "Error 404")
-    
-    # def error500():
-    #     return render_template("error500.html", title= "Error 500")
-    
-    # def error503():
-    #     return render_template("error503.html", title= "Error 503")
-    
-    # def error504():
-    #     return render_template("error504.html", title= "Error 504")
-    
-    # def error505():
-    #     return render_template("error505.html", title= "Error 505")
+    def error401(error):
+        return redirect(url_for("index"))
+
+    def error404(error):
+        return "<h1> Página no encontrada</h1>", 404
     

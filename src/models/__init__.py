@@ -10,3 +10,6 @@ Base = declarative_base()
 Base.metadata.bind = engine
 
 Session = sessionmaker(bind=engine)
+
+class Config:
+    SECRET_KEY = "j31dy$0l4y4"
