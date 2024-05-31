@@ -1,4 +1,4 @@
-from app import app
+from src.app import app
 from flask import render_template, request, redirect, url_for
 from flask_controller import FlaskController
 from src.model.pedido_model import Pedido
