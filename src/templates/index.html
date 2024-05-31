@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+{% extends "barraNavegacion.html"%} {% block page_content %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/static/styles/styles.css" />
+	</head>
+	<body>
+		<section id="login-section">
+			<div class="container" align="center">
+				<div class="box-txt">
+					<h1>INICIAR SESIÓN</h1>
+				</div>
+				<form>
+					<label for="usuario">Usuario</label><br />
+					<input type="text" id="usuario" /><br />
+					<label for="password">Contraseña</label><br />
+					<input type="password" id="password" /><br />
+					<div id="emailHelp" class="form-text">
+						<span class="text-warning"
+							><small> Olvide mi contraseña.</small>
+						</span>
+					</div>
+					<!--<div id="iniciar">
+                        <input type="submit" value="Iniciar sesión"><br/>
+                        <p class="form-link">¿Aún no tienes una cuenta? <a href="registrar.php">Regístrate aquí</a></p><br/>
+                        <p class="form-link"><a href="recuperar_contrasena.php">He olvidado mi contraseña</a></p><br/><hr/><br/>
+                        <p class="form-link"><img src="imagenes/entrar.jpg" height="10px" width="10px" alt="invitado"/>&nbsp;<a href="reservar.php">Entrar como invitado</a></p>
+                    </div>
+					<input type="submit" value="Ingresar" />-->
+				</form>
+				<a href="{{ url_for('mainPage') }}">
+					<input type="submit" value="Ingresar" />
+				</a>
+			</div>
+		</section>
+	</body>
+</html>
+{% endblock %}
