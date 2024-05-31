@@ -1,16 +1,12 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from src.model import Base, engine
+from flask_controller import FlaskControllerRegister
 
 app = Flask(__name__)
-# app.config ["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:Mg52744319@localhost/fashionprocess'
+register = FlaskControllerRegister(app)
+register.register_package("src.controller")
 
-# db=SQLAlchemy(app)
-
-# with app.app_context():
-#    db.create_all()
-
-
-from controller import *
+Base.metadata.create_all(engine)
 
 if __name__ == "__main__":
     app.run(debug=True) # si llaman a __name__ se reproduce

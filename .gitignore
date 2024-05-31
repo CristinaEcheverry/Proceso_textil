@@ -1,2 +1,31 @@
+# ignorar entorno virtual
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/Lib/
+.venv/Lib/*
+.venv/Scripts/
+.venv/Scripts/*
+.venv/pyvenv.cfg
+.venv/*
+.venv/lib/*
+.venv/include/
 .venv/
+.venv/bin/
+.venv/Lib/site-packages/*
+
+
+# ignorar archivos de configuración
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+.pytest_cache/
 __pycache__/
+*.py[cod]
+*$py.class

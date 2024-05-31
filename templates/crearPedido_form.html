@@ -8,53 +8,20 @@
 			rel="stylesheet"
 			href="{{ url_for('static', filename='styles/estilos_form.css') }}"
 		/>
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-			crossorigin="anonymous"
-		/>
-		<script
-			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-			crossorigin="anonymous"
-		></script>
 	</head>
 	<body>
-		<header>
-			<h1>Crear Pedido</h1>
-		</header>
-		<div class="contenido">
-			<div class="Formulario">
-				<form action="" method="post">
-					<label class="form-group">Nombre o Razón Social</label>
-					<input
-						type="text"
-						class="info"
-						id="formGroupExampleInput"
-						placeholder="Example input"
-					/>
-					<br />
-					<label class="form-group">Dirección</label>
-					<input
-						type="text"
-						class="info"
-						id="formGroupExampleInput2"
-						placeholder="Another input"
-					/>
-					<br />
+		<form action="crearPedido" method="post">
+			<div>
+				<header>
+					<h1>Crear Pedido</h1>
+				</header>
+				<label class="form-group" for="num-pedido">No. Pedido</label>
+				<input type="text" class="info" id="num-pedido" name="num-pedido" />
+			</div>
+			<div class="contenido">
+				<div class="Formulario">
 					<label for="lang">Tipo Identificación</label>
-					<select name="lenguajes" id="lang">
+					<select name="tipo_identificacion" id="tipo_identificacion">
 						<option value="javascript">CC</option>
 						<option value="php">TI</option>
 						<option value="java">NIT</option>
@@ -65,7 +32,34 @@
 					<input
 						type="text"
 						class="info"
-						id="formGroupExampleInput2"
+						name="num_identificacion"
+						id="num_identificacion"
+						placeholder="Another input"
+					/>
+					<br />
+					<label class="form-group">Nombre o Razón Social</label>
+					<input
+						type="text"
+						class="info nombres"
+						name="nombre"
+						id="razon-social"
+						placeholder="Example input"
+					/>
+					<br />
+					<label class="form-group">Dirección</label>
+					<input
+						type="text"
+						class="info"
+						name="direccion"
+						id="direccion"
+						placeholder="Another input"
+					/>
+					<label class="form-group">Ciudad</label>
+					<input
+						type="text"
+						class="info"
+						name="ciudad"
+						id="ciudad"
 						placeholder="Another input"
 					/>
 					<br />
@@ -73,7 +67,8 @@
 					<input
 						type="text"
 						class="info"
-						id="formGroupExampleInput"
+						name="telefono"
+						id="telefono"
 						placeholder="Example input"
 					/>
 					<br />
@@ -81,136 +76,121 @@
 					<input
 						type="email"
 						class="info"
-						id="formGroupExampleInput2"
+						name="correo"
+						id="correo"
 						placeholder="Another input"
 					/>
 					<br />
-					<label class="form-group">Ciudad</label>
-					<input
-						type="text"
-						class="info"
-						id="formGroupExampleInput2"
-						placeholder="Another input"
-					/>
-				</form>
-			</div>
-			<div class="fechas">
-				<label class="form-group" for="num-pedido">No. Pedido</label>
-				<input type="text" class="info" id="num-pedido" name="num-pedido" />
-				<br /><br />
-				<form action="" method="post">
+				</div>
+				<div class="fechas">
 					<label class="form-group" for="estados">Estado Pedido</label>
 					<select name="estado-pedido" id="estado-pedido">
-						<option value="patronaje">Patronaje</option>
-						<option value="diseño">Diseño</option>
-						<option value="corte">Corte</option>
-						<option value="confeccion">Confección</option>
+						<option selected hidden value="">Seleccionar</option>
+						<option value="patronaje">Abierto</option>
+						<option value="diseño">Devuelto</option>
 						<option value="cerrado">Entregado</option>
+						<option value="cerrado">Cancelado</option>
 					</select>
 					<br /><br />
-					<label class="form-group" for="fechaPedido"
-						>Fecha del pedido:</label
-					>
+					<label class="form-group" for="fechaPedido">Fecha pedido:</label>
 					<input
 						type="date"
 						class="info"
+						name="fecha-pedido"
 						id="fechaPedido"
 						name="fechaPedido"
 					/><br /><br />
 					<label class="form-group" for="fechaRecibido"
-						>Fecha del documento:</label
+						>Fecha documento:</label
 					>
 					<input
 						type="date"
 						class="info"
+						name="fecha-recibido"
 						id="fechaRecibido"
 						name="fechaRecibido"
 					/><br /><br />
 					<label class="form-group" for="fechaDespacho"
-						>Fecha de despacho:</label
+						>Fecha despacho:</label
 					>
-					<input type="date" id="fechaDespacho" name="fechaDespacho" />
-				</form>
+					<input type="date" id="fechaDespacho" name="fecha-despacho" />
+					<br /><br />
+					<label class="form-group" for="tipos">Tipo Pedido</label>
+					<select name="tipo-pedido" id="tipo-pedido">
+						<option selected hidden value="">Seleccionar</option>
+						<option value="patronaje">Patronaje</option>
+						<option value="diseño">Diseño</option>
+						<option value="corte">Corte</option>
+						<option value="confeccion">Confección</option>
+						<option value="total">Producción</option>
+					</select>
+				</div>
 			</div>
-		</div>
-		<h2>Tabla de Pedidos</h2>
-		<table class="tabla scroll-auto">
-			<tr>
-				<thead class="titulos">
-					<th>#</th>
-					<th>Cod Artículo</th>
-					<th>Descripción</th>
-					<th>Cantidad en metros</th>
-					<th>Cantidad prendas</th>
-					<th>Valor Unitario</th>
-					<th>Total</th>
-				</thead>
-				<tbody>
+			<div>
+				<h2>Tabla de Pedidos</h2>
+				<table class="tabla scroll-auto">
 					<tr>
-						<th scope="row">1</th>
-						<td><input type="text" value="" /></td>
-						<td><input type="text" value="" /></td>
-						<td><input type="number" value="0" /></td>
-						<td><input type="number" value="0" /></td>
-						<td><input type="number" value="$ 0.0" /></td>
-						<td id="total"></td>
+						<thead class="titulos">
+							<th>#</th>
+							<th>Tipo prenda</th>
+							<th>Prenda</th>
+							<th>Material</th>
+							<th>Cantidad</th>
+							<th>Medidas</th>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>
+									<input type="text" value="" name="tipo_prenda_id" />
+								</td>
+								<td><input type="text" value="" name="prenda_id" /></td>
+								<td><input type="text" value="" name="material" /></td>
+								<td>
+									<input type="number" value="0" name="cantidad" />
+								</td>
+								<td>
+									<input
+										type="button"
+										href="#"
+										value="Agregar Medidas"
+										name="medidas"
+									/>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>
+									<input type="text" value="" name="tipo_prenda_id" />
+								</td>
+								<td><input type="text" value="" name="prenda_id" /></td>
+								<td><input type="text" value="" name="material" /></td>
+								<td>
+									<input type="number" value="0" name="cantidad" />
+								</td>
+								<td>
+									<input
+										type="button"
+										href="#"
+										value="Agregar Medidas"
+										name="medidas"
+									/>
+								</td>
+							</tr>
+						</tbody>
 					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td><input type="text" value="" /></td>
-						<td><input type="text" value="" /></td>
-						<td><input type="number" value="0" /></td>
-						<td><input type="number" value="0" /></td>
-						<td><input type="number" value="$ 0.0" /></td>
-						<td id="total"></td>
-					</tr>
-				</tbody>
-			</tr>
-		</table>
-		<table class="totales">
-			<thead>
-				<th></th>
-				<th></th>
-			</thead>
-			<tbody>
-				<tr>
-					<th>IVA</th>
-					<td>$ 0.0</td>
-				</tr>
-				<tr>
-					<th>Descuentos</th>
-					<td>$ 0.0</td>
-				</tr>
-				<tr>
-					<th>Subtotal</th>
-					<td>$ 0.0</td>
-				</tr>
-				<tr>
-					<th>Anticipo</th>
-					<td>$ 0.0</td>
-				</tr>
-				<tr>
-					<th>Total</th>
-					<td>$ 0.0</td>
-				</tr>
-			</tbody>
-		</table>
-		<table>
-			<tr>
-				<td>
-					<div class="form-group">
-						<label class="form-group">Observaciones</label>
-						<textarea
-							class="info"
-							id="formGroupExampleInput"
-							placeholder="Example input"
-						></textarea>
-					</div>
-				</td>
-			</tr>
-		</table>
-
-		<input type="submit" value="Enviar" class="Formulario" />
-		<input type="submit" value="Cancelar" class="Formulario" />
+				</table>
+				<div class="form-group">
+					<label>Observaciones</label>
+					<textarea
+						class="info"
+						id="formGroupExampleInput"
+						placeholder="Example input"
+					></textarea>
+				</div>
+			</div>
+			<input type="submit" value="Enviar" class="Formulario" />
+			<!-- <input type="submit" value="Cancelar" class="Formulario" /> -->
+		</form>
 	</body>
 </html>
