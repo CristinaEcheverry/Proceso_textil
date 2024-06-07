@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tipo de Prendas</title>
+		<link
+			rel="stylesheet"
+			href="{{url_for ('static', filename='styles/pruebas.css')}}"
+		/>
+	</head>
+	<body>
+		<h1>Tipo de Prendas</h1>
+		<form action="tipo_prendas" method="post">
+			<label for="nombre">Tipo de Prenda:</label>
+			<input type="text" id="nombre" name="nombre" required />
+			<button type="submit">Agregar Tipo de Prenda</button>
+		</form>
+		<h2>Tipos de Prendas Ingresados</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>N°</th>
+					<th>Tipo</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for tipo in tipos %}
+				<tr>
+					<td>{{ tipo.id }}</td>
+					<td>{{ tipo.descripcion.name }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ url_for('prendas') }}">Ver Prendas</a>
+	</body>
+</html>
