@@ -4,14 +4,14 @@ from src.model import session, Base
 class Pedido(Base):
     __tablename__ = 'pedido'
     id = Column(Integer, primary_key=True)
-    tipo_identificacion = Column(Enum('C.C', 'C.E', 'NIT'))
+    tipo_identificacion = Column(SmallInteger, ForeignKey('tipo_identificacion.id'), nullable=False)
     numero_identificacion = Column(String(15))
     nombre = Column(String(50))
     direccion = Column(String(50))
     ciudad = Column(String(40))
     telefono = Column(String(30))
     correo = Column(String(50))
-    estado_pedido = Column(Enum('En proceso', 'Abierto', 'Cerrado', 'Cancelado'))
+    estado_pedido = Column(Enum('Devuelto', 'Abierto', 'Entregado', 'Cancelado'))
     fecha_pedido = Column(Date)
     fecha_documento = Column(DateTime)
     fecha_despacho = Column(Date)
@@ -43,6 +43,16 @@ class Pedido(Base):
 
     def agregar_pedido(self):
         session.add(self)
+        session.commit()
+
+    def optener_pedido(self):
+        return session.query(Pedido).all()
+
+    def modificar_pedido(self):
+        session.commit()
+
+    def eliminar_pedido(self):
+        session.delete(self)
         session.commit()
     
 
