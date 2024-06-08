@@ -18,4 +18,4 @@ def prendas():
         return redirect(url_for('prendas'))
     tipos = TipoPrenda.obtener_tipo_prendas()
     prendas = Prenda.obtener_prendas()
-    return render_template('crearPrendas.html', tipos=tipos, prendas=prendas, enum_values=TipoPrendaEnum)
+    return render_template('prendas.html', tipos=tipos, prendas=prendas, enum_values=TipoPrendaEnum)
