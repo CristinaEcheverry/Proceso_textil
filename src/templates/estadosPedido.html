@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}<title>Estados pedido</title>
+
+{% endblock %} {% block body %}
+<h1>Estado pedido</h1>
+<form action="estadoPedido" method="post">
+	<label for="nombre">Estado pedido:</label>
+
+	<select name="estados" id="estado_pedido">
+		{% for ep in enum_estadoPeValue %}
+		<option value="{{ep.value}}">{{ep.name}}</option>
+		{% endfor %}
+	</select>
+	<button type="submit">Agregar Estado pedido</button>
+</form>
+<h2>Estados de pedido</h2>
+<table>
+	<thead>
+		<tr>
+			<th>N°</th>
+			<th>Estados</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for states in estadosP %}
+		<tr>
+			<td>{{ states.id }}</td>
+			<td>{{ states.estados.name }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
