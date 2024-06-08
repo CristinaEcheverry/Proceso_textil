@@ -11,4 +11,4 @@ def tipo_prendas():
         TipoPrenda.agregar_tipo_prenda(nuevo_tipo)
         return redirect(url_for('tipo_prendas'))
     tipos = TipoPrenda.obtener_tipo_prendas()
-    return render_template('crearTipoPrenda.html', tipos=tipos)
+    return render_template('tiposPrenda.html', tipos=tipos)
