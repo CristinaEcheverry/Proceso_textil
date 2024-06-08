@@ -8,17 +8,17 @@ class TipoIdentificacion(Base):
     __tablename__ = 'tipo_identificacion'
     id = Column(SmallInteger, primary_key=True)
     codigo = Column(Enum(TipoIdentificacionEnum), nullable=False)
-    descripcion = Column(String(50), nullable=False)
+    nameIdent = Column(String(50), nullable=False)
 
     #se crea relacion con tabla pedidos
-    pedido = relationship('Pedido',back_populates='tipo_identificacion')
+    pedido = relationship('Pedido',backref='tipo_identificacion')
 
-    def __init__(self, codigo, descripcion):
+    def __init__(self, codigo,nameIdent):
         self.codigo = codigo
-        self.descripcion = descripcion
+        self.nameIdent =nameIdent
 
     def __repr__(self):
-        return f'{self.descripcion}'
+        return f'{self.nameIdent}'
     
     def agregar_tipo_identificacion(self):
         session.add(self)
@@ -30,3 +30,10 @@ class TipoIdentificacion(Base):
     
     def mostrar_tipo_identificacion(self):
         return session.query(TipoIdentificacion).filter(TipoIdentificacion.id == self.id).first()
+    
+    def modificar_tipo_identificacion(self):
+        session.commit()
+
+    def eliminar_tipo_identificacion(self):
+        session.delete(self)
+        session.commit()
