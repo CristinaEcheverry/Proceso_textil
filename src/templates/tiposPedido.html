@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}
+<title>TipoPedido</title>
+{% endblock %} {% block body %}
+
+<h1>Tipo de pedido</h1>
+<form action="tipoPedido" method="post">
+	<label for="tipo_pedido">Tipo de pedido:</label>
+	<select name="tipo_pedido" id="tipo_pedido">
+		{% for tp in enum_tipoPeValue %}
+		<option value="{{ tp.value }}">{{ tp.name }}</option>
+		{% endfor %}
+	</select>
+	<button type="submit">Agregar Tipo de pedido</button>
+</form>
+<h2>Tipos de pedido</h2>
+<table>
+	<thead>
+		<tr>
+			<th>N°</th>
+			<th>Tipo Pedido</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for tiposP in tipoP %}
+		<tr>
+			<td>{{ tiposP.id }}</td>
+			<td>{{ tiposP.tipo_pedido.name }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
