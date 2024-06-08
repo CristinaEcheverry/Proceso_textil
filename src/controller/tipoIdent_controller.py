@@ -7,9 +7,9 @@ from src.model.enums.enum_tipoIden import TipoIdentificacionEnum
 def tipoIdent():
     if request.method == 'POST':
         codigo = request.form.get('codigo')
-        descripcion = request.form.get('descripcion')
-        nuevo_tipo_ident = TipoIdentificacion(codigo, descripcion)
+        nameIdent = request.form.get('nameIdent')
+        nuevo_tipo_ident = TipoIdentificacion(codigo, nameIdent)
         TipoIdentificacion.agregar_tipo_identificacion(nuevo_tipo_ident)
         return redirect(url_for('tipoIdent'))
     identificacion = TipoIdentificacion.obtener_tipo_identificacion()
-    return render_template('tipoIdent.html', identificaciones=identificacion, enum_idValue= TipoIdentificacionEnum)
+    return render_template('tiposIdentidad.html', identificaciones=identificacion, enum_idValue= TipoIdentificacionEnum)

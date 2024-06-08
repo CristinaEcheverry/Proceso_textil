@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block title %}<title>Tipo de identificacion</title>
+{% endblock %} {% block body %}
+<h1>Tipo de identificacion</h1>
+<form action="tipoIdent" method="post">
+	<label for="tipo_identificacion">Nomenclatura:</label>
+	<select name="codigo" id="tipo_identificacion">
+		{% for iv in enum_idValue %}
+		<option value="{{ iv.value }}">{{ iv.name }}</option>
+		{% endfor %}
+	</select>
+	<label for="nameIdent">Tipo de identificación:</label>
+	<input type="text" id="nameIdent" name="nameIdent" required />
+	<button type="submit">Agregar Tipo de identificacion</button>
+</form>
+<h2>Tipos de identificacion</h2>
+<table>
+	<thead>
+		<tr>
+			<th>N°</th>
+			<th>Nomenclatura</th>
+			<th>Identificación</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for i in identificaciones %}
+		<tr>
+			<td>{{ i.id }}</td>
+			<td>{{ i.codigo.name }}</td>
+			<td>{{ i.nameIdent}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
