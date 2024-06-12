@@ -1,7 +1,7 @@
 from enum import Enum
 
 class EstadoPedidoEnum(Enum):
-    Devuelto = 'Devuelto'
-    Abierto = 'Abierto'
-    Entregado = 'Entregado'
-    Cancelado = 'Cancelado'
+    Devuelto = 1
+    Abierto = 2
+    Entregado = 3
+    Cancelado = 4

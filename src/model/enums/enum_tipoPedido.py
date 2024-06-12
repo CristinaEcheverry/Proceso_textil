@@ -1,8 +1,8 @@
 from enum import Enum
 
 class TipoPedidoEnum(Enum):
-    PRODUCCION = 'full'
-    PATRONAJE = 'patronaje'
-    DISENO = 'desing'
-    CORTE = 'corte'
-    CONFECCION = 'confección'
+    Produccion = 1
+    Patronaje = 2
+    Diseno = 3
+    Corte = 4
+    Confeccion = 5
