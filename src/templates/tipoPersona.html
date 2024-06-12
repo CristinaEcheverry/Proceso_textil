@@ -1,0 +1,29 @@
+{% extends base.html %} {% block title %}<title>Crear tipo persona</title>
+{% endblock %} {% block body %}
+<h1>Crear tipo persona</h1>
+	<form action="tipoPersona" method="post">
+		<label for="tipo-persona">Nomenclatura:</label>
+		<select name="tipo_persona" id="tipo-persona">
+			<option selected value="">Seleccionar</option>
+			{% for tiposPersona in enum_tipoPersona %}
+			<option value="{{ tiposPersona.value }}">{{ tiposPersona.name }}</option>
+			{% endfor %}
+	</form>
+	<h2>Tipos de identificacion</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>N°</th>
+				<th>Nomenclatura</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for t in tipoP %}
+			<tr>
+				<td>{{ t.id }}</td>
+				<td>{{ t.tipo_persona.name }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
