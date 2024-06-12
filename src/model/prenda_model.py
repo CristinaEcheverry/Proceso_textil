@@ -28,6 +28,16 @@ class Prenda(Base):
     def obtener_prendas():
         return session.query(Prenda).all()
 
+    @staticmethod
+    def obtener_prendas_id(id):
+        return session.query(Prenda).filter(Prenda.id == id).first()
+    
+    #aqui voy agregar una consulta a la tabla tipoPrenda para mostrar la descripcion de la prenda
+    @staticmethod
+    def mostrar_prenda():
+        result = session.query(Prenda.descripcion, TipoPrenda.descripcion).join(TipoPrenda, Prenda.tipo_prenda_id == TipoPrenda.id).all()
+        return result
+
     # def mostrar_prenda():
     #     result = session.query(TipoPrenda.descripcion).joinedload(Prenda, Prenda.tipo_prendas_id == TipoPrenda.id).all()
     #     return result
