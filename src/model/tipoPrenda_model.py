@@ -1,17 +1,9 @@
 from sqlalchemy import Column, SmallInteger, Enum
 from src.model import session, Base
-# from src.model.prenda_model import Prenda
-from enum import Enum as enum
-
 from sqlalchemy.orm import relationship, joinedload
+from src.model.enums.enum_tipoPrenda import TipoPrendaEnum
 
-class TipoPrendaEnum(enum):
-    SUPERIORES = 1
-    INFERIORES = 2
-    INTERIORES = 3
-    VESTIDOS = 4
-    OVEROLES = 5
-    TELA = 6
+
 
 class TipoPrenda(Base):
     __tablename__ = 'tipo_prenda'
