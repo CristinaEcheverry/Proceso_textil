@@ -11,7 +11,7 @@ class TipoIdentificacion(Base):
     nameIdent = Column(String(50), nullable=False)
 
     #se crea relacion con tabla pedidos
-    pedido = relationship('Pedido',backref='tipo_identificacion')
+    cliente = relationship('Clientes',backref='clientes_tipo_identificacion')
 
     def __init__(self, codigo,nameIdent):
         self.codigo = codigo
@@ -28,6 +28,10 @@ class TipoIdentificacion(Base):
     def obtener_tipo_identificacion():
         return session.query(TipoIdentificacion).all()
     
+    @staticmethod
+    def obtener_tipo_identificacion_id(id):
+        return session.query(TipoIdentificacion).get(id)
+
     def mostrar_tipo_identificacion(self):
         return session.query(TipoIdentificacion).filter(TipoIdentificacion.id == self.id).first()
     
