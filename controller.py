@@ -23,9 +23,9 @@ from flask import render_template  # render_template es para usar las vistas
 # def consultarPedido():
 #     return render_template("consultarPedido_form.html", title= "Consultar pedido")
 
-@app.route("/ingresarMateriales")
-def ingresoMaterial():
-    return render_template("ingresoMaterial_form.html", title= "Ingresar material")
+# @app.route("/ingresarMateriales")
+# def ingresoMaterial():
+#     return render_template("ingresoMaterial_form.html", title= "Ingresar material")
 
 @app.route("/modificarRefMeaterial")
 def modificarRefMeaterial():
@@ -35,6 +35,6 @@ def modificarRefMeaterial():
 def consultarMaterial():
     return render_template("consultarMaterial_form.html", title= "Consultar Material")
     
-@app.route("/crearCliente")
-def crearCliente():
-    return render_template("crearCliente.html", title= "CrearCliente")
+# @app.route("/crearCliente")
+# def crearCliente():
+#     return render_template("crearCliente.html", title= "CrearCliente")

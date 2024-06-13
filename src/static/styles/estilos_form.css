@@ -4,16 +4,16 @@ body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.titulo {
-	display: inline;
+.contenedor-info {
+	display: flex;
 }
 
-header {
+.titulo {
 	text-align: center;
 	width: 80%;
 }
 
-.num-pedido {
+.id-pedido {
 	width: 20%;
 }
 
