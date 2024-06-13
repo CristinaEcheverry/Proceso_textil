@@ -11,28 +11,29 @@
 	</head>
 	<body>
 		<form action="crearPedido" method="post">
-			<div class="titulo">
-				<header>
-					<h1>Crear Pedido</h1>
-				</header>
-				<label class="num-pedido" for="num-pedido">No. Pedido</label>
-				<input
-					type="text"
-					class="num-pedido"
-					id="num-pedido"
-					name="num-pedido"
-				/>
+			<div class="contenedor-info">
+				<div class="titulo">
+					<header>
+						<h1>Crear Pedido</h1>
+					</header>
+				</div>
+				<div class="id-pedido">
+					<label class="num-pedido" for="num-pedido">No. Pedido</label>
+					<input
+						type="text"
+						class="num-pedido"
+						id="num-pedido"
+						name="num-pedido"
+					/>
+				</div>
 			</div>
 			<div class="contenido">
 				<div class="Formulario">
 					<label for="lang">Tipo Identificación</label>
 					<select name="tipo_identificacion" id="tipo_identificacion">
-						<option selected hidden value="">Seleccionar</option>
-						<option value="1">CC</option>
-						<option value="2">TI</option>
-						<option value="3">NIT</option>
-						<option value="4">CE</option>
-						<option value="5">PAS</option>
+						{% for i in enum_idValue %}
+						<option value="{{ i.value }}">{{ i.name }}</option>
+						{% endfor %}
 					</select>
 					<label class="form-group">Número Identificación</label>
 					<input
@@ -89,13 +90,11 @@
 					<br />
 				</div>
 				<div class="fechas">
-					<label class="form-group" for="estados">Estado Pedido</label>
-					<select name="estado-pedido" id="estado-pedido">
-						<option selected hidden value="">Seleccionar</option>
-						<option value="patronaje">Abierto</option>
-						<option value="diseño">Devuelto</option>
-						<option value="cerrado">Entregado</option>
-						<option value="cerrado">Cancelado</option>
+					<label for="nombre">Estado pedido</label>
+					<select name="estados" id="estado_pedido">
+						{% for ep in enum_estadoPeValue %}
+						<option value="{{ep.value}}">{{ep.name}}</option>
+						{% endfor %}
 					</select>
 					<br /><br />
 					<label class="form-group" for="fechaPedido">Fecha pedido:</label>
@@ -110,7 +109,7 @@
 						>Fecha documento:</label
 					>
 					<input
-						type="date"
+						type="datetime"
 						class="info"
 						name="fecha-recibido"
 						id="fechaRecibido"
@@ -121,14 +120,11 @@
 					>
 					<input type="date" id="fechaDespacho" name="fecha-despacho" />
 					<br /><br />
-					<label class="form-group" for="tipos">Tipo Pedido</label>
-					<select name="tipo-pedido" id="tipo-pedido">
-						<option selected hidden value="">Seleccionar</option>
-						<option value="patronaje">Patronaje</option>
-						<option value="diseño">Diseño</option>
-						<option value="corte">Corte</option>
-						<option value="confeccion">Confección</option>
-						<option value="total">Producción</option>
+					<label for="tipo_pedido">Tipo pedido:</label>
+					<select name="tipos" id="tipo_pedido">
+						{% for tp in enum_tipoPeValue %}
+						<option value="{{ tp.value }}">{{ tp.name }}</option>
+						{% endfor %}
 					</select>
 				</div>
 			</div>
@@ -148,9 +144,20 @@
 							<tr>
 								<th scope="row">1</th>
 								<td>
-									<input type="text" value="" name="tipo_prenda_id" />
+									<select id="tipo_prenda" name="tipo_prenda" required>
+										{% for tipo in enum_values %}
+										<option
+											name="tipo_prenda_id"
+											value="{{ tipo.value }}"
+										>
+											{{ tipo.name }}
+										</option>
+										{% endfor %}
+									</select>
 								</td>
-								<td><input type="text" value="" name="prenda_id" /></td>
+								<td>
+									<input type="text" value="" name="nombre-prenda" />
+								</td>
 								<td><input type="text" value="" name="material" /></td>
 								<td>
 									<input type="number" value="0" name="cantidad" />
@@ -167,7 +174,17 @@
 							<tr>
 								<th scope="row">2</th>
 								<td>
-									<input type="text" value="" name="tipo_prenda_id" />
+									<select
+										id="tipo_prenda_id"
+										name="tipo_prenda_id"
+										required
+									>
+										{% for tipo in enum_values %}
+										<option value="{{ tipo.value }}">
+											{{ tipo.name }}
+										</option>
+										{% endfor %}
+									</select>
 								</td>
 								<td><input type="text" value="" name="prenda_id" /></td>
 								<td><input type="text" value="" name="material" /></td>
@@ -189,6 +206,7 @@
 				<div class="form-group">
 					<label>Observaciones</label>
 					<textarea
+						form="crearPedido"
 						class="info"
 						id="formGroupExampleInput"
 						placeholder="Example input"
