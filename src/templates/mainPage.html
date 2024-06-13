@@ -47,6 +47,117 @@
 						</li>
 					</ul>
 				</li>
+				<li class="opciones">
+					Clientes
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('crearCliente') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="opciones">
+					Usuario
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoUsuario') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+					</ul>
+				</li>
+
+
+
+				<li class="opciones">
+					Inventario
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('tipo_prendas') }}"
+								target="principal"
+							>
+								Crear tipo prenda
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('prendas') }}"
+								target="principal"
+							>
+								Crear prenda
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('tipoPedido') }}"
+								target="principal"
+							>
+								Crear tipo de pedido
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('estadoPedido') }}"
+								target="principal"
+							>
+								Crear estado pedido
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('tipoIdent') }}"
+								target="principal"
+							>
+								Crear tipo identificación
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<li class="opciones">
+					Material
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton1"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+					</ul>
+				</li>
+
+						
 				
 
 				
