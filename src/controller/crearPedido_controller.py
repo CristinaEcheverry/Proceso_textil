@@ -27,6 +27,6 @@ class ProductosController(FlaskController):
              
             return redirect(url_for('crearPedido'))
         prendas = Prenda.mostrar_prenda()
-        pedido = Pedido.optener_pedido()
+        pedido = Pedido.obtener_pedido()
         return render_template('crearPedido_form.html', enum_idValue=TipoIdentificacionEnum, enum_estadoPeValue=EstadoPedidoEnum, enum_tipoPeValue=TipoPedidoEnum, enum_values=TipoPrendaEnum, prendas=prendas, pedidos=pedido)
             
