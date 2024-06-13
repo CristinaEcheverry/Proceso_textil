@@ -1,0 +1,53 @@
+body {
+	background-color: #fff;
+	color: #000;
+}
+
+li {
+	list-style-type: none;
+	color: #000;
+}
+
+h1 {
+	color: #000;
+	text-align: center;
+	margin: 1% 1%;
+	text-shadow: #343a40 0.5px 0.5px 5px;
+}
+
+h2 {
+	color: #000;
+	margin: 1% 1%;
+	text-shadow: #343a40 0.5px 0.5px 5px;
+}
+
+/* estilos de la tabla */
+table {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 1em;
+	font-family: sans-serif;
+	min-width: 450px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* configura las celdas de encabezado */
+table thead tr {
+	background-color: #6d6875;
+	color: #ffffff;
+	text-align: middle;
+}
+
+/* configura el resto de celdas */
+table th,
+table td {
+	padding: 12px 15px;
+}
+
+/* configura las filas */
+table tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
