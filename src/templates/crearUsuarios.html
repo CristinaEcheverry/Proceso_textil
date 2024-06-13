@@ -1,0 +1,68 @@
+{% extends "prueba.html" %}
+
+{% block form %}
+
+<form action="ingresoUsuario" method="post">
+    {% block header %}
+    <div class="contenedor-info">
+        <div class="titulo">
+            <header>
+                <h1>Crear Usuario</h1>
+            </header>
+        </div>
+        <!-- cambiar name y en css -->
+        <div class="id-pedido">
+            <!-- aqui va el nombre del usuario que esta creando el material -->
+            <p>Nombre usuario</p>
+        </div>
+    </div>
+    {% endblock %}
+    {% block datos %}
+    <div class="contenido">
+        <div class="Formulario">
+        <label for="nombre1">Primer nombre</label>
+        <input type="text" name="primer_nombre" id="nombre1" /><br />
+        <label for="nombre2">Segundo nombre</label>
+        <input type="text" name="segundo_nombre" id="nombre2" /><br />
+        <label for="apellido1">Primer apellido</label>
+        <input type="text" name="primer_apellido" id="apellido1" /><br />
+        <label for="apellido2">Segundo apellido</label>
+        <input type="text" name="segundo_apellido" id="apellido2" /><br />
+        <label for="fechaNacimiento">Fecha Nacimiento</label>
+        <input type="date" name="fecha_nacimiento" id="fechaNacimiento" /><br />
+        <label for="tipo-identificacion">Tipo identificacion</label>
+        <select name="tipo_identificacion" id="tipo-identificacion">
+            <option selected value="">Seleccionar</option>
+            {% for tipo in enum_tipoIden %}
+            <option value="{{tipo.value}}">{{tipo.name}}</option>
+            {% endfor %}
+        </select>
+        <label for="numero-identificacion">Numero identificacion</label>
+        <input type="text" name="identificacion" id="numero-identificacion" /><br />
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" /><br />
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" /><br />
+        <label for="rol">Rol</label>
+        <select name="rol" id="rol">
+            <option selected value="">Seleccionar</option>
+            {% for rol in enum_rol %}
+            <option value="{{rol.value}}">{{rol.name}}</option>
+            {% endfor %}
+        </select>
+        <br />
+        <label for="estado-usuario">Estado usuario</label>
+        <select name="status" id="estado-usuario">
+            <option selected value="">Seleccionar</option>
+            {% for estado in enum_estadoUsuario %}
+            <option value="{{estado.value}}">{{estado.name}}</option>
+            {% endfor %}
+        </select>
+        <br />
+    </div>
+    {% endblock %}
+
+    <button type="submit">Ingresar Usuario</button>
+</form>
+    
+{% endblock %}
