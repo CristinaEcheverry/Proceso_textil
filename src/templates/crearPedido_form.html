@@ -29,20 +29,17 @@
 			</div>
 			<div class="contenido">
 				<div class="Formulario">
-					<label for="lang">Tipo Identificación</label>
-					<select name="tipo_identificacion" id="tipo_identificacion">
-						{% for i in enum_idValue %}
-						<option value="{{ i.value }}">{{ i.name }}</option>
+					<label class="form-group" for="num-identificacion"
+						>Número Identificación</label
+					>
+					<select name="num_identificacion" id="num-identificacion">
+						<option value="">Seleccionar</option>
+						{% for cliente in clientes %}
+						<option value="{{cliente.id}}">
+							{{cliente.numero_identificacion}}
+						</option>
 						{% endfor %}
 					</select>
-					<label class="form-group">Número Identificación</label>
-					<input
-						type="text"
-						class="info"
-						name="num_identificacion"
-						id="num_identificacion"
-						placeholder="Another input"
-					/>
 					<br />
 					<label class="form-group">Nombre o Razón Social</label>
 					<input
@@ -50,7 +47,7 @@
 						class="info nombres"
 						name="nombre"
 						id="razon-social"
-						placeholder="Example input"
+						disabled
 					/>
 					<br />
 					<label class="form-group">Dirección</label>
@@ -59,7 +56,7 @@
 						class="info"
 						name="direccion"
 						id="direccion"
-						placeholder="Another input"
+						disabled
 					/>
 					<label class="form-group">Ciudad</label>
 					<input
@@ -67,7 +64,7 @@
 						class="info"
 						name="ciudad"
 						id="ciudad"
-						placeholder="Another input"
+						disabled
 					/>
 					<br />
 					<label class="form-group">Telefono</label>
@@ -76,7 +73,7 @@
 						class="info"
 						name="telefono"
 						id="telefono"
-						placeholder="Example input"
+						disabled
 					/>
 					<br />
 					<label class="form-group">Correo Electronico</label>
@@ -85,7 +82,7 @@
 						class="info"
 						name="correo"
 						id="correo"
-						placeholder="Another input"
+						disabled
 					/>
 					<br />
 				</div>
@@ -104,6 +101,8 @@
 						name="fecha-pedido"
 						id="fechaPedido"
 						name="fechaPedido"
+						value="{{fecha}}"
+						readonly
 					/><br /><br />
 					<label class="form-group" for="fechaRecibido"
 						>Fecha documento:</label
