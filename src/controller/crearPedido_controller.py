@@ -3,10 +3,10 @@ from flask import render_template, request, redirect, url_for
 from flask_controller import FlaskController
 from src.model.pedido_model import Pedido
 from src.model.prenda_model import Prenda
-from src.model.enums.enum_tipoIden import TipoIdentificacionEnum
 from src.model.enums.enum_estadoPedido import EstadoPedidoEnum
 from src.model.enums.enum_tipoPedido import TipoPedidoEnum
 from src.model.enums.enum_tipoPrenda import TipoPrendaEnum
+import datetime
 
 class ProductosController(FlaskController):
     @app.route("/crearPedido", methods=['GET','POST'])
@@ -26,7 +26,8 @@ class ProductosController(FlaskController):
             Pedido.agregar_pedido(nuevo_pedido) 
              
             return redirect(url_for('crearPedido'))
+        fecha_documento = datetime.datetime.now()
         prendas = Prenda.mostrar_prenda()
         pedido = Pedido.obtener_pedido()
-        return render_template('crearPedido_form.html', enum_idValue=TipoIdentificacionEnum, enum_estadoPeValue=EstadoPedidoEnum, enum_tipoPeValue=TipoPedidoEnum, enum_values=TipoPrendaEnum, prendas=prendas, pedidos=pedido)
+        return render_template('crearPedido_form.html', enum_estadoPeValue=EstadoPedidoEnum, enum_tipoPeValue=TipoPedidoEnum, enum_values=TipoPrendaEnum, prendas=prendas, pedidos=pedido, fecha=fecha_documento)
             
