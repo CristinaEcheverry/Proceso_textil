@@ -1,5 +1,5 @@
 from src.app import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 from src.model.clientes_model import Clientes
 from src.model.tipoIdent_model import TipoIdentificacion
 from src.model.tipoPersona_model import TipoPersona
@@ -24,14 +24,11 @@ class ClientesController(FlaskController):
         tipoPersona = TipoPersona.obtener_tipo_persona()
         clientes = Clientes.obtener_cliente()
         return render_template('crearCliente.html', title= 'CrearCliente', clientes=clientes, identificacion=identificar, tipoPersona=tipoPersona)
-
-
-#manejo de errores
-#cuando esta duplicado un dato
-# @app.errorhandler(1062)
-# def handle_error(error):
-#     try:
-#       print("Entrada duplicada", error)
-#     except Exception as ex:
-#         print("")
     
+    @app.route("/cliente/<id>", methods=['GET'])
+    def obtener_cliente_por_id(id):
+        cliente = Clientes.obtener_cliente_id(id)
+        if cliente:
+            return jsonify(cliente)
+        else:
+            return jsonify({"error": "Cliente no encontrado"}), 404
