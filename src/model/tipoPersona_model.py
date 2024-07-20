@@ -14,9 +14,6 @@ class TipoPersona(Base):
     def __init__(self, tipo_persona):
         self.tipo_persona = tipo_persona
 
-    def __repr__(self):
-        return f'{self.tipo_persona}'
-
     def agregar_tipo_persona(self):
         session.add(self)
         session.commit()    

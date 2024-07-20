@@ -27,9 +27,6 @@ class Material(Base):
         self.descripcion = descripcion
         self.fecha_documento = fecha_documento
 
-    def __str__(self):
-        return f'<Material: {self.codigo} {self.estado_material}>'
-
     def to_dict(self):
         return {
             'id': self.id,

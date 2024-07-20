@@ -37,13 +37,5 @@ class EstadoMaterialEnum(Enum):
     EN_ETIQUETADO = 34
     
     def __int__(self):
-        return self.value
-    
-    def __str__(self):
-        return self.name
-    
-    @staticmethod
-    def from_string(value):
-        return EstadoMaterial[value]
-
-    
+        return self.value   
+      

@@ -41,10 +41,7 @@ class Usuarios(Base):
         f"{self.primer_nombre} {self.primer_apellido}"
         usuario = session.query(Usuarios).first()
         return print(usuario.fullname)
-
-    def __str__(self):
-        return f'<Usuario: {self.primer_nombre} {self.primer_apellido} {self.status}>'
-    
+   
     def agregar_usuario(usuario):
         usuario = session.add(usuario)
         session.commit()
