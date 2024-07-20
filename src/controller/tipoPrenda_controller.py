@@ -2,6 +2,7 @@ from src.app import app
 #Aquí se tiene que importar todos los modelos o clases
 from flask import render_template, request, redirect, url_for 
 from src.model.tipoPrenda_model import TipoPrenda
+from src.model.enums.enum_tipoPrenda import TipoPrendaEnum
 
 @app.route('/tipo_prendas', methods=['GET', 'POST'])
 def tipo_prendas():
@@ -11,4 +12,4 @@ def tipo_prendas():
         TipoPrenda.agregar_tipo_prenda(nuevo_tipo)
         return redirect(url_for('tipo_prendas'))
     tipos = TipoPrenda.obtener_tipo_prendas()
-    return render_template('tiposPrenda.html', tipos=tipos)
+    return render_template('tiposPrenda.html', tipos=tipos, enum_tipo_prenda=TipoPrendaEnum)
