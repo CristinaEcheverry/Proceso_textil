@@ -8,6 +8,12 @@
 			rel="stylesheet"
 			href="{{ url_for('static', filename='styles/estilos_form.css') }}"
 		/>
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<form action="crearPedido" method="post">
@@ -23,7 +29,9 @@
 						type="text"
 						class="num-pedido"
 						id="num-pedido"
-						name="num-pedido"
+						name="num_pedido"
+						value="{{ nuevo_numero_pedido }}"
+						readonly
 					/>
 				</div>
 			</div>
@@ -129,7 +137,7 @@
 			</div>
 			<div>
 				<h2>Tabla de Pedidos</h2>
-				<table class="tabla scroll-auto">
+				<table class="tabla scroll-auto" id="tabla_pedidos">
 					<tr>
 						<thead class="titulos">
 							<th>#</th>
@@ -140,44 +148,10 @@
 							<th>Medidas</th>
 						</thead>
 						<tbody>
-							<tr>
+							<tr class="pedido-detalle">
 								<th scope="row">1</th>
 								<td>
-									<select id="tipo_prenda" name="tipo_prenda" required>
-										{% for tipo in enum_values %}
-										<option
-											name="tipo_prenda_id"
-											value="{{ tipo.value }}"
-										>
-											{{ tipo.name }}
-										</option>
-										{% endfor %}
-									</select>
-								</td>
-								<td>
-									<input type="text" value="" name="nombre-prenda" />
-								</td>
-								<td><input type="text" value="" name="material" /></td>
-								<td>
-									<input type="number" value="0" name="cantidad" />
-								</td>
-								<td>
-									<input
-										type="button"
-										href="#"
-										value="Agregar Medidas"
-										name="medidas"
-									/>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>
-									<select
-										id="tipo_prenda_id"
-										name="tipo_prenda_id"
-										required
-									>
+									<select name="detalles[0][tipo_prenda]" required>
 										{% for tipo in enum_values %}
 										<option value="{{ tipo.value }}">
 											{{ tipo.name }}
@@ -185,35 +159,116 @@
 										{% endfor %}
 									</select>
 								</td>
-								<td><input type="text" value="" name="prenda_id" /></td>
-								<td><input type="text" value="" name="material" /></td>
 								<td>
-									<input type="number" value="0" name="cantidad" />
+									<select name="detalles[0][prenda]" required>
+										{% for prenda in prendas %}
+										<option value="{{ prenda.id }}">
+											{{ prenda.descripcion }}
+										</option>
+										{% endfor %}
+									</select>
 								</td>
 								<td>
 									<input
-										type="button"
-										href="#"
-										value="Agregar Medidas"
-										name="medidas"
+										type="text"
+										name="detalles[0][material]"
+										required
 									/>
 								</td>
+								<td>
+									<input
+										type="number"
+										name="detalles[0][cantidad]"
+										required
+									/>
+								</td>
+								<td><input type="button" value="Agregar Medidas" /></td>
 							</tr>
 						</tbody>
 					</tr>
-				</table>
-				<div class="form-group">
-					<label>Observaciones</label>
-					<textarea
-						form="crearPedido"
-						class="info"
-						id="formGroupExampleInput"
-						placeholder="Example input"
-					></textarea>
-				</div>
+				</table>				
 			</div>
 			<input type="submit" value="Enviar" class="Formulario" />
 			<!-- <input type="submit" value="Cancelar" class="Formulario" /> -->
+			<script>
+				$("#num-identificacion").change(function () {
+					var value = $(this).val();
+					if (value) {
+						$.ajax({
+							url: "/cliente/" + value,
+							type: "GET",
+							dataType: "json",
+							success: function (data) {
+								if (!data.error) {
+									$("#razon-social").val(data.nombre);
+									$("#direccion").val(data.direccion);
+									$("#ciudad").val(data.ciudad);
+									$("#telefono").val(data.telefono);
+									$("#correo").val(data.correo);
+								} else {
+									alert(data.error);
+								}
+							},
+							error: function (error) {
+								console.error("Error en la solicitud: ", error);
+							},
+						});
+					} else {
+						$("#razon-social").val("");
+						$("#direccion").val("");
+						$("#ciudad").val("");
+						$("#telefono").val("");
+						$("#correo").val("");
+					}
+				});
+
+				$(document).ready(function () {
+					let counter = 1;
+
+					function addNewRow() {
+						let newRow = `
+							<tr class="pedido-detalle">
+								<th scope="row">${counter + 1}</th>
+								<td>
+									<select name="detalles[${counter}][tipo_prenda]" required>
+										{% for tipo in enum_values %}
+										<option value="{{ tipo.value }}">{{ tipo.name }}</option>
+										{% endfor %}
+									</select>
+								</td>
+								<td>
+									<select name="detalles[${counter}][prenda]" required>
+										{% for prenda in prendas %}
+										<option value="{{ prenda.id }}">{{ prenda.descripcion }}</option>
+										{% endfor %}
+									</select>
+								</td>
+								<td><input type="text" name="detalles[${counter}][material]" required /></td>
+								<td><input type="number" name="detalles[${counter}][cantidad]" class="cantidad-input" required /></td>
+								<td><input type="button" value="Agregar Medidas" /></td>
+							</tr>
+						`;
+						$("#tabla_pedidos tbody").append(newRow);
+						counter++;
+					}
+
+					$("#addRowBtn").click(function () {
+						addNewRow();
+					});
+
+					$("#tabla_pedidos").on(
+						"keypress",
+						".cantidad-input",
+						function (e) {
+							if (e.which === 13) {
+								// Enter key
+								e.preventDefault();
+								addNewRow();
+							}
+						}
+					);
+				});
+			</script>
 		</form>
 	</body>
 </html>
