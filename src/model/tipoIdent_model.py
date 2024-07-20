@@ -1,7 +1,6 @@
 from sqlalchemy import Column, SmallInteger, Enum, String
 from src.model import session, Base
 from src.model.enums.enum_tipoIden import TipoIdentificacionEnum
-from sqlalchemy.orm import relationship
 
 
 class TipoIdentificacion(Base):
@@ -10,31 +9,32 @@ class TipoIdentificacion(Base):
     codigo = Column(Enum(TipoIdentificacionEnum), nullable=False)
     nameIdent = Column(String(50), nullable=False)
 
-    #se crea relacion con tabla pedidos
-    cliente = relationship('Clientes',backref='clientes_tipo_identificacion')
-
-    def __init__(self, codigo,nameIdent):
+    def __init__(self, codigo, nameIdent):
         self.codigo = codigo
-        self.nameIdent =nameIdent
+        self.nameIdent = nameIdent
 
-    def __repr__(self):
-        return f'{self.nameIdent}'
-    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "codigo": self.codigo.value,
+            "nameIdent": self.nameIdent
+        }
+
     def agregar_tipo_identificacion(self):
         session.add(self)
-        session.commit()    
+        session.commit()
 
     @staticmethod
     def obtener_tipo_identificacion():
         return session.query(TipoIdentificacion).all()
-    
+
     @staticmethod
     def obtener_tipo_identificacion_id(id):
-        return session.query(TipoIdentificacion).get(id)
+        return session.query(TipoIdentificacion).filter_by(id=id).first()
 
     def mostrar_tipo_identificacion(self):
-        return session.query(TipoIdentificacion).filter(TipoIdentificacion.id == self.id).first()
-    
+        return session.query(TipoIdentificacion).filter_by(id=self.id).first()
+
     def modificar_tipo_identificacion(self):
         session.commit()
 
