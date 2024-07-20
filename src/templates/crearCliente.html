@@ -103,12 +103,12 @@
 				<th>Correo Electronico</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="orderTableBody">
 			{% for c in clientes %}
 			<tr>
 				<td>{{ c.id }}</td>
-				<td>{{ c.tipo_identificacion_id.name }}</td>
-				<td>{{ c.num_identificacion }}</td>
+				<td>{{ c.tipo_identificacion_id.codigo }}</td>
+				<td>{{ c.numero_identificacion }}</td>
 				<td>{{ c.nombre }}</td>
 				<td>{{ c.direccion }}</td>
 				<td>{{ c.ciudad }}</td>
