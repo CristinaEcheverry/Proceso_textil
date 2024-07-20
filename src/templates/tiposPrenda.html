@@ -4,6 +4,13 @@
 
 <h1>Tipo de Prendas</h1>
 <form action="tipo_prendas" method="post">
+	<label for="tipo_identificacion">Nomenclatura:</label>
+	<select name="descripcion" id="tipo_prenda">
+		<option value="">Seleccionar</option>
+		{% for iv in enum_tipo_prenda %}
+		<option value="{{ iv.value }}">{{ iv.name }}</option>
+		{% endfor %}
+	</select>
 	<label for="nombre">Tipo de Prenda:</label>
 	<input type="text" id="nombre" name="nombre" required />
 	<button type="submit">Agregar Tipo de Prenda</button>
