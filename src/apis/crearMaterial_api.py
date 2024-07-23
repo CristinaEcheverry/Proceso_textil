@@ -1,6 +1,7 @@
 #creo el servicio para traer un material
 from flask_restful import Resource
 from flask import request, jsonify
+from flask_cors import cross_origin
 
 #model
 from src.model.material_model import Material
@@ -8,8 +9,14 @@ from src.model.material_model import Material
 class CrearMaterialApi(Resource):
 
     def get(self):
-        return jsonify({"message": "Hola mundo"})
+        materiales = Material.obtener_material()
+        materiales_result = []
+        for material in materiales:
+            materiales_result.append(material.to_dict())
+        return materiales_result
     
+    #permite almacenar en la base de datos
+    @cross_origin()
     def post(self):
         material = Material(codigo=request.json['codigo'],
                             num_lote=request.json['num_lote'],
@@ -27,14 +34,11 @@ class CrearMaterialApi(Resource):
         except Exception as e:
             return jsonify({"message": "Error al guardar el material"}), 500
         return jsonify({"message": "Material agregado correctamente"}), 200
-        # return "Producto almacenado correctamente", 200
         
         # def get(self):
         #     material = Material.obtener_material()
-        #     return jsonify(material)
-            
+        #     return jsonify(material)            
     
-        # def post(self):#permite almacenar en la base de datos
         #     codigo = request.json.get("codigo_material")
         #     num_lote = request.json.get("num_lote")
         #     producto = request.json.get("producto")
