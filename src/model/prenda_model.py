@@ -17,8 +17,13 @@ class Prenda(Base):
         self.descripcion = descripcion
         self.tipo_prenda_id = tipo_prenda_id
 
-    def __repr__(self):
-        return f'{self.descripcion, self.tipo_prenda_id}'
+    #se crea un diccionario para retornar los datos de la prenda
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "descripcion": self.descripcion,
+            "tipo_prenda_id": self.tipo_prenda_id
+        }
 
     def agregar_prenda(self):
         session.add(self)

@@ -13,6 +13,13 @@ class TipoPersona(Base):
     
     def __init__(self, tipo_persona):
         self.tipo_persona = tipo_persona
+    
+    #Serializar un enum
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'tipo_persona': self.tipo_persona.value
+        }
 
     def agregar_tipo_persona(self):
         session.add(self)
@@ -35,3 +42,4 @@ class TipoPersona(Base):
     def eliminar_tipo_persona(self):
         session.delete(self)
         session.commit()
+        

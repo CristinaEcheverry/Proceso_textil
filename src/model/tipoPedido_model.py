@@ -15,8 +15,12 @@ class TipoPedido(Base):
     def __init__(self, tipo_pedido):
         self.tipo_pedido = tipo_pedido
 
-    def __repr__(self):
-        return f'{self.tipo_pedido}'
+    #Serializar un enum
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'tipo_pedido': self.tipo_pedido.value
+        }
     
     def agregar_tipo_pedido(self):
         session.add(self)
@@ -35,3 +39,4 @@ class TipoPedido(Base):
     def eliminar_tipo_pedido(self):
         session.delete(self)
         session.commit()
+        

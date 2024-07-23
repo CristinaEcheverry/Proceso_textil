@@ -1,6 +1,6 @@
 from sqlalchemy import Column, SmallInteger, Enum
 from src.model import session, Base
-from sqlalchemy.orm import relationship, joinedload
+from sqlalchemy.orm import relationship
 from src.model.enums.enum_tipoPrenda import TipoPrendaEnum
 
 
@@ -17,8 +17,12 @@ class TipoPrenda(Base):
     def __init__(self, descripcion):
         self.descripcion = descripcion
 
-    def __repr__(self):
-        return f'{self.descripcion}'
+    #Serializar un enum
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'descripcion': self.descripcion.value
+        }
 
     #se hacen metodos para agregar y obtener los tipos de prendas
     def agregar_tipo_prenda(self):
@@ -31,3 +35,10 @@ class TipoPrenda(Base):
 
     def mostrar_tipo_prenda(self):
         return session.query(TipoPrenda).filter(TipoPrenda.id == self.id).first()
+
+    def modificar_tipo_prenda(self):
+        session.commit()
+
+    def eliminar_tipo_prenda(self):
+        session.delete(self)
+        session.commit()

@@ -27,6 +27,7 @@ class Material(Base):
         self.descripcion = descripcion
         self.fecha_documento = fecha_documento
 
+    #Serializar un enum
     def to_dict(self):
         return {
             'id': self.id,
@@ -36,7 +37,7 @@ class Material(Base):
             'cantidad': self.cantidad,
             'proveedor': self.proveedor,
             'color': self.color,
-            'estado_material': self.estado_material,
+            'estado_material': self.estado_material.value,
             'descripcion': self.descripcion
         }
 
@@ -66,3 +67,4 @@ class Material(Base):
     def eliminar_material():
         session.delete()
         session.commit()
+        

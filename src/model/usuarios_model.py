@@ -36,6 +36,24 @@ class Usuarios(Base):
         self.rol = rol
         self.status = status
 
+    #Serializar un enum
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'primer_nombre': self.primer_nombre,
+            'segundo_nombre': self.segundo_nombre,
+            'primer_apellido': self.primer_apellido,
+            'segundo_apellido': self.segundo_apellido,
+            'fecha_nacimiento': self.fecha_nacimiento,
+            'tipo_identificacion': self.tipo_identificacion.value,
+            'identificacion': self.identificacion,
+            'email': self.email,
+            'password': self.password,
+            'rol': self.rol.value,
+            'status': self.status.value,
+            'fecha_creacion': self.fecha_creacion
+        }
+
     @hybrid_property
     def fullname(self):
         f"{self.primer_nombre} {self.primer_apellido}"
@@ -77,3 +95,4 @@ class Usuarios(Base):
     def eliminar_usuario(self):
         session.delete(self)
         session.commit()
+        

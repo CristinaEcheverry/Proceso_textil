@@ -14,8 +14,12 @@ class EstadoPedido(Base):
     def __init__(self, estados):
         self.estados =estados
 
-    def __repr__(self):
-        return f'{self.estados}'
+    #Serializar un enum
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'estados': self.estados.value
+        }
     
     def agregar_estado_pedido(self):
         session.add(self)
@@ -34,3 +38,4 @@ class EstadoPedido(Base):
     def eliminar_estado_pedido(self):
         session.delete(self)
         session.commit()
+        
