@@ -1,6 +1,5 @@
-{% extends "prueba.html" %} {% block form %}
+{% extends "base.html" %} {% block body %}
 <form action="ingresoMaterial" method="post">
-	{% block header %}
 	<div class="contenedor-info">
 		<div class="titulo">
 			<header>
@@ -13,7 +12,6 @@
 			<p>Nombre usuario</p>
 		</div>
 	</div>
-	{% endblock %} {% block datos %}
 	<div class="contenido">
 		<div class="Formulario">
 			<label for="codigo-material">Código</label>
@@ -53,7 +51,6 @@
 		</div>
 		<div class="fechas">{% include "fechas.html" %}</div>
 	</div>
-	{% endblock %}
 	<button type="submit">Crear Material</button>
 </form>
 {% endblock %}
