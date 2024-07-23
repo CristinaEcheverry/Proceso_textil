@@ -8,14 +8,26 @@ from flask import render_template, request, redirect, url_for
 from src.model.tipoPrenda_model import TipoPrenda, TipoPrendaEnum
 from src.model.prenda_model import Prenda
 
-@app.route('/prendas', methods=['GET', 'POST'])
-def prendas():
-    if request.method == 'POST':
-        descripcion = request.form.get('nombre-prenda')
-        tipo_prenda_id = int(request.form.get('tipo_prenda_id'))
-        nueva_prenda = Prenda(descripcion, tipo_prenda_id)
-        Prenda.agregar_prenda(nueva_prenda)
-        return redirect(url_for('prendas'))
-    tipos = TipoPrenda.obtener_tipo_prendas()
-    prendas = Prenda.obtener_prendas()
-    return render_template('prendas.html', tipos=tipos, prendas=prendas, enum_values=TipoPrendaEnum)
+from flask_controller import FlaskController
+
+#importaciones necesarias para el uso de la api
+from flask_restful import Api
+from src.apis.prendas_api import PrendasApi
+
+class PrendasController(FlaskController):
+    api = Api(app)
+
+    # aqui creo una ruta para hacer el llamado a mi api
+    api.add_resource(PrendasApi, '/api/prendas')
+
+    @app.route('/prendas', methods=['GET', 'POST'])
+    def prendas():
+        if request.method == 'POST':
+            descripcion = request.form.get('nombre-prenda')
+            tipo_prenda_id = int(request.form.get('tipo_prenda_id'))
+            nueva_prenda = Prenda(descripcion, tipo_prenda_id)
+            Prenda.agregar_prenda(nueva_prenda)
+            return redirect(url_for('prendas'))
+        tipos = TipoPrenda.obtener_tipo_prendas()
+        prendas = Prenda.obtener_prendas()
+        return render_template('prendas.html', tipos=tipos, prendas=prendas, enum_values=TipoPrendaEnum)
