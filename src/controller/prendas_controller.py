@@ -24,7 +24,7 @@ class PrendasController(FlaskController):
     def prendas():
         if request.method == 'POST':
             descripcion = request.form.get('nombre-prenda')
-            tipo_prenda_id = int(request.form.get('tipo_prenda_id'))
+            tipo_prenda_id = request.form.get('tipo_prenda_id')
             nueva_prenda = Prenda(descripcion, tipo_prenda_id)
             Prenda.agregar_prenda(nueva_prenda)
             return redirect(url_for('prendas'))

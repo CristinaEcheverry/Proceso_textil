@@ -20,15 +20,24 @@ class PedidosController(FlaskController):
             fecha_documento = request.form.get('fecha-recibido')
             fecha_despacho = request.form.get('fecha-despacho')
             tipo_pedido_id = request.form.get('tipos')            
-            nuevo_pedido = Pedido(numero_pedido, clientes_id, estado_pedido_id, fecha_pedido, fecha_documento, fecha_despacho, tipo_pedido_id, observaciones)
+            nuevo_pedido = Pedido(numero_pedido, clientes_id, estado_pedido_id, fecha_pedido, fecha_documento, fecha_despacho, tipo_pedido_id)
             Pedido.agregar_pedido(nuevo_pedido)
+
             # Agregar detalle del pedido
-            tipo_prenda_id = str(request.form.get('tipo_prenda'))
-            prenda_id = request.form.get('prenda')
-            material = request.form.get('material')
-            cantidad = request.form.get('cantidad')
-            nuevo_pedido_detalle = PedidoDetalle(nuevo_pedido.id, tipo_prenda_id, prenda_id, material, cantidad)
-            PedidoDetalle.agregar_detalle(nuevo_pedido_detalle)                           
+            detalles = request.form.getlist('detalles')
+            for i, detalle in enumerate(detalles):
+                tipo_prenda_id = request.form.get(f'detalles[{i}][tipo_prenda]')
+                prenda_id = request.form.get(f'detalles[{i}][prenda]')
+                material = request.form.get(f'detalles[{i}][material]')
+                cantidad = request.form.get(f'detalles[{i}][cantidad]')
+                nuevo_pedido_detalle = PedidoDetalle(numero_pedido, tipo_prenda_id, prenda_id, material, cantidad)
+                PedidoDetalle.agregar_detalle(nuevo_pedido_detalle)                           
+
+
+            # tipo_prenda_id = request.form.get('tipo_prenda')
+            # prenda_id = request.form.get('prenda')
+            # material = request.form.get('material')
+            # cantidad = request.form.get('cantidad')
             return redirect(url_for('crearPedido'))    
         # Definimos clientes_id para la ruta GET, aunque no lo necesitamos realmente
         fecha_documento = datetime.datetime.now()

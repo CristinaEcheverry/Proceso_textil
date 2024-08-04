@@ -49,14 +49,14 @@ class Pedido(Base):
 class PedidoDetalle(Base):
     __tablename__ = 'pedido_detalle'
     id = Column(Integer, primary_key=True)
-    pedido_id = Column(Integer, ForeignKey('pedido.id'), nullable=False)
+    numero_pedido = Column(String(10), nullable=False)
     tipo_prenda_id = Column(SmallInteger, ForeignKey('tipo_prenda.id'), nullable=False)
     prenda_id = Column(Integer, ForeignKey('prenda.id'), nullable=False)
     material = Column(String(50), nullable=False)
     cantidad = Column(Float(10.3), nullable=False)
 
-    def __init__(self, pedido_id, tipo_prenda_id, prenda_id, material, cantidad):
-        self.pedido_id = pedido_id
+    def __init__(self, numero_pedido, tipo_prenda_id, prenda_id, material, cantidad):
+        self.numero_pedido = numero_pedido
         self.tipo_prenda_id = tipo_prenda_id
         self.prenda_id = prenda_id
         self.material = material

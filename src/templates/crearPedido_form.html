@@ -146,12 +146,14 @@
 							<th>Material</th>
 							<th>Cantidad</th>
 							<th>Medidas</th>
+							<th>Controles</th>
 						</thead>
-						<tbody>
+						<tbody id="pedido-detalle-tbody">
 							<tr class="pedido-detalle">
-								<th scope="row">1</th>
+								<th scope="row-index">1</th>
 								<td>
 									<select name="detalles[0][tipo_prenda]" required>
+										<option value="">Seleccionar</option>
 										{% for tipo in enum_values %}
 										<option value="{{ tipo.value }}">
 											{{ tipo.name }}
@@ -161,6 +163,7 @@
 								</td>
 								<td>
 									<select name="detalles[0][prenda]" required>
+										<option value="">Seleccionar</option>
 										{% for prenda in prendas %}
 										<option value="{{ prenda.id }}">
 											{{ prenda.descripcion }}
@@ -183,14 +186,78 @@
 									/>
 								</td>
 								<td><input type="button" value="Agregar Medidas" /></td>
+								<td>
+									<button type="button" class="remove-row">-</button>
+									<button type="button" id="add-row">+</button>
+								</td>
 							</tr>
 						</tbody>
 					</tr>
-				</table>				
+				</table>
 			</div>
 			<input type="submit" value="Enviar" class="Formulario" />
 			<!-- <input type="submit" value="Cancelar" class="Formulario" /> -->
 			<script>
+				$(document).ready(function () {
+					let rowIndex = 1;
+
+					$("#add-row").click(function () {
+						let newRow = `
+						<tr class="pedido-detalle">
+							<td class="row-index">${rowIndex + 1}</td>
+							<td>
+								<select name="detalles[${rowIndex}][tipo_prenda]" required>
+									<option value="">Seleccionar</option>
+									{% for tipo in enum_values %}
+									<option value="{{ tipo.value }}">{{ tipo.name }}</option>
+									{% endfor %}
+								</select>
+							</td>
+							<td>
+								<select name="detalles[${rowIndex}][prenda]" required>
+									<option value="">Seleccionar</option>
+									{% for prenda in prendas %}
+									<option value="{{ prenda.id }}">{{ prenda.descripcion }}</option>
+									{% endfor %}
+								</select>
+							</td>
+							<td>
+								<input type="text" name="detalles[${rowIndex}][material]" required />
+							</td>
+							<td>
+								<input type="number" name="detalles[${rowIndex}][cantidad]" required />
+							</td>
+							<td><input type="button" value="Agregar Medidas" /></td>
+							<td>
+								<button type="button" class="remove-row">-</button>
+								<button type="button" id="add-row">+</button>
+							</td>
+						</tr>`;
+
+						$("#pedido-detalle-tbody").append(newRow);
+						rowIndex++;
+					});
+
+					$(document).on("click", ".remove-row", function () {
+						$(this).closest("tr").remove();
+						// Actualizar los índices de las filas
+						$(".pedido-detalle").each(function (index) {
+							$(this)
+								.find(".row-index")
+								.text(index + 1);
+							$(this)
+								.find("select, input")
+								.each(function () {
+									let name = $(this).attr("name");
+									if (name) {
+										name = name.replace(/\[\d+\]/, `[${index}]`);
+										$(this).attr("name", name);
+									}
+								});
+						});
+					});
+				});
+
 				$("#num-identificacion").change(function () {
 					var value = $(this).val();
 					if (value) {
@@ -220,53 +287,6 @@
 						$("#telefono").val("");
 						$("#correo").val("");
 					}
-				});
-
-				$(document).ready(function () {
-					let counter = 1;
-
-					function addNewRow() {
-						let newRow = `
-							<tr class="pedido-detalle">
-								<th scope="row">${counter + 1}</th>
-								<td>
-									<select name="detalles[${counter}][tipo_prenda]" required>
-										{% for tipo in enum_values %}
-										<option value="{{ tipo.value }}">{{ tipo.name }}</option>
-										{% endfor %}
-									</select>
-								</td>
-								<td>
-									<select name="detalles[${counter}][prenda]" required>
-										{% for prenda in prendas %}
-										<option value="{{ prenda.id }}">{{ prenda.descripcion }}</option>
-										{% endfor %}
-									</select>
-								</td>
-								<td><input type="text" name="detalles[${counter}][material]" required /></td>
-								<td><input type="number" name="detalles[${counter}][cantidad]" class="cantidad-input" required /></td>
-								<td><input type="button" value="Agregar Medidas" /></td>
-							</tr>
-						`;
-						$("#tabla_pedidos tbody").append(newRow);
-						counter++;
-					}
-
-					$("#addRowBtn").click(function () {
-						addNewRow();
-					});
-
-					$("#tabla_pedidos").on(
-						"keypress",
-						".cantidad-input",
-						function (e) {
-							if (e.which === 13) {
-								// Enter key
-								e.preventDefault();
-								addNewRow();
-							}
-						}
-					);
 				});
 			</script>
 		</form>
