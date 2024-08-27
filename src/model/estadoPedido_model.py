@@ -29,8 +29,11 @@ class EstadoPedido(Base):
     def obtener_estado_pedido():
         return session.query(EstadoPedido).all()
     
-    def mostrar_estado_pedido(self):
-        return session.query(EstadoPedido).filter(EstadoPedido.id == self.id).first()
+    def obtener_estado_pedido_por_id(estado_id):
+        return session.query(EstadoPedido).filter(EstadoPedido.id == estado_id).first()
+
+    # def mostrar_estado_pedido(self):
+    #     return session.query(EstadoPedido).filter(EstadoPedido.id == self.id).first()
     
     def modificar_estado_pedido(self):
         session.commit()
