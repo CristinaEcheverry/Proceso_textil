@@ -54,7 +54,7 @@ a {
 
 footer {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	background-color: #b5838d;
+	background-color: #004aad;
 	width: 100%;
 	margin: auto;
 	display: flex;
@@ -64,7 +64,7 @@ footer {
 
 #barranavegacion {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	background-color: #b5838d;
+	background-color: #004aad;
 	display: flex;
 	justify-content: space-between;
 }
@@ -83,7 +83,7 @@ footer {
 
 #panel_navegation {
 	margin-top: 10px;
-	background-color: #b5838d;
+	background-color: #004aad;
 	float: left;
 	border-radius: 20px 20px 20px 20px;
 }
@@ -113,7 +113,6 @@ footer {
 
 .operaciones {
 	display: none;
-	background-color: #ecc0c9;
 	color: black;
 	text-decoration: none;
 	transition: all 0.3s;
