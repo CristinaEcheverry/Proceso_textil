@@ -41,17 +41,80 @@
 								class="dropdown-item"
 								href="{{ url_for('consultarPedido') }}"
 								target="principal"
-							>
+								>
 								Consultar
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="opciones">
+					Materiales
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton2"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="{{ url_for('ingresoMaterial') }}"
+								target="principal"
+							>
+								Crear
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+								>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="opciones">
+					Despachos
+					<ul
+						class="dropdown-menu dropdown-menu-dark"
+						aria-labelledby="dropdownMenuButton3"
+					>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+							>
+								Consultar
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="opciones">
 					Clientes
 					<ul
 						class="dropdown-menu dropdown-menu-dark"
-						aria-labelledby="dropdownMenuButton1"
+						aria-labelledby="dropdownMenuButton4"
 					>
 						<li class="operaciones">
 							<a
@@ -62,14 +125,32 @@
 								Crear
 							</a>
 						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+								>
+								Consultar
+							</a>
+						</li>
 					</ul>
 				</li>
 
 				<li class="opciones">
-					Usuario
+					Usuarios
 					<ul
 						class="dropdown-menu dropdown-menu-dark"
-						aria-labelledby="dropdownMenuButton1"
+						aria-labelledby="dropdownMenuButton5"
 					>
 						<li class="operaciones">
 							<a
@@ -80,16 +161,25 @@
 								Crear
 							</a>
 						</li>
+						<li class="operaciones">
+							<a
+								class="dropdown-item"
+								href="#"
+								target="principal"
+							>
+								Modificar
+							</a>
+						</li>
 					</ul>
 				</li>
 
 
 
 				<li class="opciones">
-					Inventario
+					Otros
 					<ul
 						class="dropdown-menu dropdown-menu-dark"
-						aria-labelledby="dropdownMenuButton1"
+						aria-labelledby="dropdownMenuButton6"
 					>
 						<li class="operaciones">
 							<a
@@ -138,31 +228,9 @@
 						</li>
 					</ul>
 				</li>
-				
-				<li class="opciones">
-					Material
-					<ul
-						class="dropdown-menu dropdown-menu-dark"
-						aria-labelledby="dropdownMenuButton1"
-					>
-						<li class="operaciones">
-							<a
-								class="dropdown-item"
-								href="{{ url_for('ingresoMaterial') }}"
-								target="principal"
-							>
-								Crear
-							</a>
-						</li>
-					</ul>
-				</li>
-
-						
-				
-
-				
 			</ul>
 		</aside>
+		<a href="{{ url_for('index') }}" class="btn-cerrar">Cerrar Sesión</a>
 		<section>
 			<div class="form-space">
 				<td>
