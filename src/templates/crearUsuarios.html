@@ -1,9 +1,8 @@
-{% extends "prueba.html" %}
+{% extends "base.html" %}
 
-{% block form %}
+{% block body %}
 
-<form action="ingresoUsuario" method="post">
-    {% block header %}
+<form action="ingresoUsuario" method="post">    
     <div class="contenedor-info">
         <div class="titulo">
             <header>
@@ -15,9 +14,7 @@
             <!-- aqui va el nombre del usuario que esta creando el material -->
             <p>Nombre usuario</p>
         </div>
-    </div>
-    {% endblock %}
-    {% block datos %}
+    </div>    
     <div class="contenido">
         <div class="Formulario">
         <label for="nombre1">Primer nombre</label>
@@ -60,7 +57,6 @@
         </select>
         <br />
     </div>
-    {% endblock %}
 
     <button type="submit">Ingresar Usuario</button>
 </form>
