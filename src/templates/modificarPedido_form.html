@@ -1,251 +1,303 @@
 <!DOCTYPE html>
+
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<link rel="stylesheet" href="/static/styles/styles.css" />
+		<meta name="viewport" content="Formulario crear pedido" />
 		<link
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-			crossorigin="anonymous"
+			href="{{ url_for('static', filename='styles/estilos_form.css') }}"
 		/>
 		<script
 			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 			crossorigin="anonymous"
 		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-			crossorigin="anonymous"
-		></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	</head>
 	</head>
 	<body>
-		<header>
-			<h1 aling="center">Modificar Pedido</h1>
-		</header>
-
-		<form>
-			<table class="Formulario">
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Número Pedido</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<form action="#">
-								<label for="lang">Tipo Identificación</label><br />
-								<select name="lenguajes" id="lang">
-									<option value="cedula">CC</option>
-									<option value="tarjetaIdentidad">TI</option>
-									<option value="NIT">NIT</option>
-									<option value="cedulaExtranjera">CE</option>
-									<option value="pasaporte">PAS</option>
-								</select>
-							</form>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Número Identificación</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Nombre o Razón Social</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Dirección</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Telefono</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Correo Electronico</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<form action="#">
-								<label for="lang">Tipo pedido</label><br />
-								<select name="lenguajes" id="lang">
-									<option value="php">1 DP Diseño,patronaje</option>
-									<option value="java">2 PC patronaje,corte</option>
-									<option value="java">
-										3 FULL diseño,patronje,corte,confeccion
+		<form action="{{url_for('modificarPedidoId'), id=pedido.id }}" method="post">
+			
+			<div class="contenedor-info">
+				<div class="titulo">
+					<header>
+						<h1>Modificar Pedido</h1>
+					</header>
+				</div>
+				<div class="id-pedido">
+					<label class="num-pedido" for="num-pedido">No. Pedido</label>
+					<input
+						type="text"
+						class="num-pedido"
+						id="num-pedido"
+						name="num_pedido"
+						value="{{ pedido.numero_pedido }}"
+						readonly
+					/>
+				</div>
+			</div>
+			<div class="contenido">
+				<!-- Asumiendo que 'pedido' contiene la información general del pedido -->
+				<div class="Formulario">
+					<label class="form-group" for="num-identificacion">Número Identificación</label>
+					<select name="num_identificacion" id="num-identificacion" required>
+						<option value="">Seleccionar</option>
+						{% for cliente in clientes %}
+						<option value="{{ cliente.numero_identificacion }}" 
+								{% if cliente.numero_identificacion == pedido.num_identificacion %}selected{% endif %}>
+							{{ cliente.numero_identificacion }}
+						</option>
+						{% endfor %}
+					</select>
+					<br />
+					<label class="form-group">Nombre o Razón Social</label>
+					<input
+						type="text"
+						class="info nombres"
+						name="nombre"
+						id="razon-social"
+						value="{{ pedido.nombre }}"
+					/>
+					<br />
+					<label class="form-group">Dirección</label>
+					<input
+						type="text"
+						class="info"
+						name="direccion"
+						id="direccion"
+						value="{{ pedido.direccion }}"
+					/>
+					<br />
+					<label class="form-group">Ciudad</label>
+					<input
+						type="text"
+						class="info"
+						name="ciudad"
+						id="ciudad"
+						value="{{ pedido.ciudad }}"
+					/>
+					<br />
+					<label class="form-group">Teléfono</label>
+					<input
+						type="text"
+						class="info"
+						name="telefono"
+						id="telefono"
+						value="{{ pedido.telefono }}"
+					/>
+					<br />
+					<label class="form-group">Correo Electrónico</label>
+					<input
+						type="email"
+						class="info"
+						name="correo"
+						id="correo"
+						value="{{ pedido.correo }}"
+					/>
+					<br />
+				</div>
+				<div class="fechas">
+					<label for="estado_pedido">Estado pedido</label>
+					<select name="estados" id="estado_pedido" required>
+						{% for ep in enum_estadoPeValue %}
+						<option value="{{ ep.value }}" 
+								{% if ep.value == pedido.estado %}selected{% endif %}>
+							{{ ep.name }}
+						</option>
+						{% endfor %}
+					</select>
+					<br /><br />
+					<label class="form-group" for="fechaPedido">Fecha pedido:</label>
+					<input
+						type="date"
+						class="info"
+						name="fecha-pedido"
+						id="fechaPedido"
+						value="{{ pedido.fecha_pedido }}"
+						required
+					/>
+					<br /><br />
+					<label class="form-group" for="fechaRecibido">Fecha documento:</label>
+					<input
+						type="datetime-local"
+						class="info"
+						name="fecha-recibido"
+						id="fechaRecibido"
+						value="{{ pedido.fecha_documento }}"
+						required
+					/>
+					<br /><br />
+					<label class="form-group" for="fechaDespacho">Fecha despacho:</label>
+					<input
+						type="date"
+						id="fechaDespacho"
+						name="fecha-despacho"
+						value="{{ pedido.fecha_despacho }}"
+					/>
+					<br /><br />
+					<label for="tipo_pedido">Tipo pedido:</label>
+					<select name="tipos" id="tipo_pedido" required>
+						{% for tp in enum_tipoPeValue %}
+						<option value="{{ tp.value }}" 
+								{% if tp.value == pedido.tipo_pedido %}selected{% endif %}>
+							{{ tp.name }}
+						</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		
+			<div>
+				<h2>Tabla de Pedidos</h2>
+				<table class="tabla scroll-auto" id="tabla_pedidos">
+					<thead class="titulos">
+						<tr>
+							<th>#</th>
+							<th>Tipo prenda</th>
+							<th>Prenda</th>
+							<th>Material</th>
+							<th>Cantidad</th>
+							<th>Medidas</th>
+							<th>Controles</th>
+						</tr>
+					</thead>
+					<tbody id="pedido-detalle-tbody">
+						{% for detalle in pedido.detalles %}
+						<tr class="pedido-detalle">
+							<th scope="row-index">{{ loop.index }}</th>
+							<td>
+								<select name="detalles[{{ loop.index0 }}][tipo_prenda]" required>
+									<option value="">Seleccionar</option>
+									{% for tipo in enum_values %}
+									<option value="{{ tipo.value }}" 
+											{% if tipo.value == detalle.tipo_prenda %}selected{% endif %}>
+										{{ tipo.name }}
 									</option>
-									<option value="java">4 C corte</option>
+									{% endfor %}
 								</select>
-							</form>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<form action="#">
-								<label for="lang">Tipo prenda</label><br />
-								<select name="lenguajes" id="lang">
-									<option value="php">prenda superior</option>
-									<option value="java">prenda inferior</option>
-									<option value="java">falda</option>
-									<option value="java">vestido</option>
-									<option value="java">overoles</option>
+							</td>
+							<td>
+								<select name="detalles[{{ loop.index0 }}][prenda]" required>
+									<option value="">Seleccionar</option>
+									{% for prenda in prendas %}
+									<option value="{{ prenda.id }}" 
+											{% if prenda.id == detalle.prenda %}selected{% endif %}>
+										{{ prenda.descripcion }}
+									</option>
+									{% endfor %}
 								</select>
-							</form>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<form action="#">
-								<label for="lang">Estado Pedido </label><br />
-								<select name="lenguajes" id="lang">
-									<option value="php">ingresado</option>
-									<option value="java">procesado</option>
-									<option value="java">corte</option>
-									<option value="java">confeccion</option>
-									<option value="java">despacho</option>
-									<option value="java">enviado</option>
-									<option value="java">devolucion</option>
-								</select>
-								<td>
-									<div class="form-group">
-										<label class="form-group">Referencia</label>
-										<input
-											type="text"
-											class="Formulario"
-											id="formGroupExampleInput"
-											placeholder="Example input"
-										/>
-									</div>
-								</td>
-							</form>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Fecha Pedido</label>
-							<input
-								type="date"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Fecha entrega</label>
-							<input
-								type="date"
-								class="Formulario"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Cantidad de metros</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Cantidad de prendas</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput2"
-								placeholder="Another input"
-							/>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-group">
-							<label class="form-group">Observaciones</label>
-							<input
-								type="text"
-								class="Formulario"
-								id="formGroupExampleInput"
-								placeholder="Example input"
-							/>
-						</div>
-					</td>
-				</tr>
-			</table>
-			<input type="submit" value="Enviar" class="Formulario" />
+							</td>
+							<td>
+								<input
+									type="text"
+									name="detalles[{{ loop.index0 }}][material]"
+									value="{{ detalle.material }}"
+									required
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									name="detalles[{{ loop.index0 }}][cantidad]"
+									value="{{ detalle.cantidad }}"
+									required
+								/>
+							</td>
+							<td>
+								<!-- Asegúrate de incluir el campo de medidas si es necesario -->
+								<input
+									type="text"
+									name="detalles[{{ loop.index0 }}][medidas]"
+									value="{{ detalle.medidas }}"
+								/>
+							</td>
+							<td>
+								<!-- Aquí podrías añadir controles adicionales, como botones para eliminar -->
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			{% endfor %}
+			<button type="submit">Guardar Cambios</button>
+			<script>
+				$(document).ready(function() {
+					$("#num-pedido").change(function () {
+						var value = $(this).val();
+						if (value) {
+							$.ajax({
+								url: "/pedido/" + value,
+								type: "GET",
+								dataType: "json",
+								success: function (data) {
+									if (!data.error) {
+										$("#razon-social").val(data.nombre);
+										$("#direccion").val(data.direccion);
+										$("#ciudad").val(data.ciudad);
+										$("#telefono").val(data.telefono);
+										$("#correo").val(data.correo);
+										$("#fechaRecibido").val(data.fecha_documento);
+									
+										// Limpiar la tabla de detalles del pedido
+										$("#pedido-detalle-tbody").empty();
+
+										// Añadir los detalles del pedido a la tabla
+										data.detalles.forEach(function(detalle, index) {
+											var row = `
+												<tr class="pedido-detalle">
+													<th scope="row-index">${index + 1}</th>
+													<td>
+														<select name="detalles[${index}][tipo_prenda]" required>
+															<option value="">Seleccionar</option>
+															${enum_values.map(tipo => `
+																<option value="${tipo.value}" ${tipo.value === detalle.tipo_prenda ? 'selected' : ''}>
+																	${tipo.name}
+																</option>
+															`).join('')}
+														</select>
+													</td>
+													<td>
+														<select name="detalles[${index}][prenda]" required>
+															<option value="">Seleccionar</option>
+															${prendas.map(prenda => `
+																<option value="${prenda.id}" ${prenda.id === detalle.prenda ? 'selected' : ''}>
+																	${prenda.descripcion}
+																</option>
+															`).join('')}
+														</select>
+													</td>
+													<td>
+														<input type="text" name="detalles[${index}][material]" value="${detalle.material}" required />
+													</td>
+													<td>
+														<input type="number" name="detalles[${index}][cantidad]" value="${detalle.cantidad}" required />
+													</td>
+												</tr>
+											`;
+											$("#pedido-detalle-tbody").append(row);
+										});
+									} else {
+										alert(data.error);
+									}
+								},
+								error: function (error) {
+									console.error("Error en la solicitud: ", error);
+								},
+							});
+						} else {
+							$("#razon-social").val("");
+							$("#direccion").val("");
+							$("#ciudad").val("");
+							$("#telefono").val("");
+							$("#correo").val("");
+							$("#fechaRecibido").val("");
+							$("#pedido-detalle-tbody").empty();
+						}
+					});
+				});
+			</script>
 		</form>
 	</body>
 </html>
