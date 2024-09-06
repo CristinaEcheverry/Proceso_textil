@@ -3,7 +3,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="Formulario crear pedido" />
+		<meta name="viewport" content="Formulario_crear_pedido" />
 		<link
 			rel="stylesheet"
 			href="{{ url_for('static', filename='styles/estilos_form.css') }}"
@@ -15,10 +15,11 @@
 		></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	</head>
-	</head>
 	<body>
-		<form action="{{url_for('modificarPedidoId'), id=pedido.id }}" method="post">
-			
+		<form
+			action="{{url_for('modificarPedidoId', id=pedidos.id)}}"
+			method="post"
+		>
 			<div class="contenedor-info">
 				<div class="titulo">
 					<header>
@@ -32,32 +33,34 @@
 						class="num-pedido"
 						id="num-pedido"
 						name="num_pedido"
-						value="{{ pedido.numero_pedido }}"
+						value="{{ pedidos.numero_pedido }}"
 						readonly
 					/>
 				</div>
 			</div>
 			<div class="contenido">
-				<!-- Asumiendo que 'pedido' contiene la información general del pedido -->
 				<div class="Formulario">
-					<label class="form-group" for="num-identificacion">Número Identificación</label>
-					<select name="num_identificacion" id="num-identificacion" required>
-						<option value="">Seleccionar</option>
-						{% for cliente in clientes %}
-						<option value="{{ cliente.numero_identificacion }}" 
-								{% if cliente.numero_identificacion == pedido.num_identificacion %}selected{% endif %}>
-							{{ cliente.numero_identificacion }}
-						</option>
-						{% endfor %}
-					</select>
+					<label class="form-group" for="num-identificacion"
+						>Número Identificación</label
+					>
+					<input
+						type="text"
+						class="num_identificacion"
+						name="num_identificacion"
+						id="num-identificacion"
+						value="{{ pedidos.clientes.numero_identificacion }}"
+						readonly
+					/>
 					<br />
+
 					<label class="form-group">Nombre o Razón Social</label>
 					<input
 						type="text"
 						class="info nombres"
 						name="nombre"
 						id="razon-social"
-						value="{{ pedido.nombre }}"
+						value="{{ pedidos.clientes.nombre }}"
+						requiered
 					/>
 					<br />
 					<label class="form-group">Dirección</label>
@@ -66,44 +69,46 @@
 						class="info"
 						name="direccion"
 						id="direccion"
-						value="{{ pedido.direccion }}"
+						value="{{ pedidos.clientes.direccion }}"
+						requiered
 					/>
-					<br />
 					<label class="form-group">Ciudad</label>
 					<input
 						type="text"
 						class="info"
 						name="ciudad"
 						id="ciudad"
-						value="{{ pedido.ciudad }}"
+						value="{{ pedidos.clientes.ciudad }}"
+						requiered
 					/>
 					<br />
-					<label class="form-group">Teléfono</label>
+					<label class="form-group">Telefono</label>
 					<input
 						type="text"
 						class="info"
 						name="telefono"
 						id="telefono"
-						value="{{ pedido.telefono }}"
+						value="{{ pedidos.clientes.telefono }}"
+						requiered
 					/>
 					<br />
-					<label class="form-group">Correo Electrónico</label>
+					<label class="form-group">Correo Electronico</label>
 					<input
 						type="email"
 						class="info"
 						name="correo"
 						id="correo"
-						value="{{ pedido.correo }}"
+						value="{{ pedidos.clientes.correo }}"
+						requiered
 					/>
 					<br />
 				</div>
 				<div class="fechas">
-					<label for="estado_pedido">Estado pedido</label>
+					<label for="nombre">Estado pedido</label>					
 					<select name="estados" id="estado_pedido" required>
 						{% for ep in enum_estadoPeValue %}
-						<option value="{{ ep.value }}" 
-								{% if ep.value == pedido.estado %}selected{% endif %}>
-							{{ ep.name }}
+						<option value="{{ ep.id }}"{% if ep.id == pedidos.estado_pedido_id %}selected{% endif %}>
+							{{ep.estados.name}}
 						</option>
 						{% endfor %}
 					</select>
@@ -112,78 +117,82 @@
 					<input
 						type="date"
 						class="info"
-						name="fecha-pedido"
+						name="fecha_pedido"
 						id="fechaPedido"
-						value="{{ pedido.fecha_pedido }}"
-						required
-					/>
-					<br /><br />
-					<label class="form-group" for="fechaRecibido">Fecha documento:</label>
+						value="{{ pedidos.fecha_pedido }}"
+					/><br />
+					<label class="form-group" for="fechaRecibido"
+						>Fecha documento:</label
+					>
 					<input
-						type="datetime-local"
+						type="datetime"
 						class="info"
-						name="fecha-recibido"
+						name="fecha_recibido"
 						id="fechaRecibido"
-						value="{{ pedido.fecha_documento }}"
-						required
-					/>
-					<br /><br />
-					<label class="form-group" for="fechaDespacho">Fecha despacho:</label>
+						value="{{ pedidos.fecha_documento }}"
+						readonly
+					/><br />
+					<label class="form-group" for="fechaDespacho"
+						>Fecha despacho:</label
+					>
 					<input
 						type="date"
 						id="fechaDespacho"
-						name="fecha-despacho"
-						value="{{ pedido.fecha_despacho }}"
+						name="fecha_despacho"
+						value="{{pedidos.fecha_despacho}}"
 					/>
-					<br /><br />
+					<br />
 					<label for="tipo_pedido">Tipo pedido:</label>
 					<select name="tipos" id="tipo_pedido" required>
 						{% for tp in enum_tipoPeValue %}
-						<option value="{{ tp.value }}" 
-								{% if tp.value == pedido.tipo_pedido %}selected{% endif %}>
-							{{ tp.name }}
+						<option value="{{ tp.id}}"{% if tp.id == pedidos.tipo_pedido_id %}selected{% endif %}>
+							{{ tp.tipo_pedido.name }}
 						</option>
 						{% endfor %}
 					</select>
 				</div>
 			</div>
-		
 			<div>
 				<h2>Tabla de Pedidos</h2>
-				<table class="tabla scroll-auto" id="tabla_pedidos">
-					<thead class="titulos">
+				<table class="tabla scroll-auto" id="detallesPedido">
+					<thead>
 						<tr>
-							<th>#</th>
-							<th>Tipo prenda</th>
+							<th>Tipo de Prenda</th>
 							<th>Prenda</th>
 							<th>Material</th>
 							<th>Cantidad</th>
 							<th>Medidas</th>
-							<th>Controles</th>
 						</tr>
 					</thead>
-					<tbody id="pedido-detalle-tbody">
-						{% for detalle in pedido.detalles %}
-						<tr class="pedido-detalle">
-							<th scope="row-index">{{ loop.index }}</th>
+					<tbody>
+						{% for detalles in pedidos.detalle_pedido %}
+						<tr>
 							<td>
-								<select name="detalles[{{ loop.index0 }}][tipo_prenda]" required>
-									<option value="">Seleccionar</option>
-									{% for tipo in enum_values %}
-									<option value="{{ tipo.value }}" 
-											{% if tipo.value == detalle.tipo_prenda %}selected{% endif %}>
-										{{ tipo.name }}
+								<select
+									name="detalles[{{ loop.index0 }}][tipo_prenda]"
+									required
+								>
+									{% for tipo in tipos_prenda %}
+									<option
+										value="{{ tipo.id }}"
+										{% if tipo.id == detalles.tipo_prenda_id %}selected{% endif %}
+									>
+										{{ tipo.descripcion.name }}
 									</option>
 									{% endfor %}
 								</select>
 							</td>
 							<td>
-								<select name="detalles[{{ loop.index0 }}][prenda]" required>
-									<option value="">Seleccionar</option>
-									{% for prenda in prendas %}
-									<option value="{{ prenda.id }}" 
-											{% if prenda.id == detalle.prenda %}selected{% endif %}>
-										{{ prenda.descripcion }}
+								<select
+									name="detalles[{{ loop.index0 }}][prenda]"
+									required
+								>
+									{% for tipo in prendas %}
+									<option
+										value="{{ tipo.id }}"
+										{% if tipo.id == detalles.prenda_id %}selected{% endif %}
+									>
+										{{ tipo.descripcion }}
 									</option>
 									{% endfor %}
 								</select>
@@ -192,7 +201,7 @@
 								<input
 									type="text"
 									name="detalles[{{ loop.index0 }}][material]"
-									value="{{ detalle.material }}"
+									value="{{detalles.material}}"
 									required
 								/>
 							</td>
@@ -200,86 +209,69 @@
 								<input
 									type="number"
 									name="detalles[{{ loop.index0 }}][cantidad]"
-									value="{{ detalle.cantidad }}"
+									value="{{detalles.cantidad}}"
 									required
 								/>
 							</td>
 							<td>
-								<!-- Asegúrate de incluir el campo de medidas si es necesario -->
-								<input
-									type="text"
-									name="detalles[{{ loop.index0 }}][medidas]"
-									value="{{ detalle.medidas }}"
-								/>
-							</td>
-							<td>
-								<!-- Aquí podrías añadir controles adicionales, como botones para eliminar -->
+								<input type="button" value="Agregar Medidas" />
 							</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 				</table>
 			</div>
-			{% endfor %}
-			<button type="submit">Guardar Cambios</button>
-			<script>
-				$(document).ready(function() {
-					$("#num-pedido").change(function () {
+			<button type="submit">Actualizar Pedido</button>
+		</form>
+
+		<!-- <script>
+			const currentUrl = window.location.href;
+			console.log("URL actual:" + currentUrl);
+			$(document).ready(function () {
+				$("#num-pedido").keypress(function (e) {
+					var code = e.keyCode ? e.keyCode : e.which;
+					if (code == 13) {
 						var value = $(this).val();
+						console.log("Número de pedido:", value);
 						if (value) {
 							$.ajax({
-								url: "/pedido/" + value,
+								url: "/modificarPedidoId/" + value,
 								type: "GET",
 								dataType: "json",
 								success: function (data) {
-									if (!data.error) {
-										$("#razon-social").val(data.nombre);
-										$("#direccion").val(data.direccion);
-										$("#ciudad").val(data.ciudad);
-										$("#telefono").val(data.telefono);
-										$("#correo").val(data.correo);
-										$("#fechaRecibido").val(data.fecha_documento);
-									
-										// Limpiar la tabla de detalles del pedido
-										$("#pedido-detalle-tbody").empty();
+									if (data) {
+										console.log("Detalles del pedido:", data);
+										var pedido = data.pedido[0];
+										var cliente = data.clientes_id[0];
+										$("#num-identificacion").val(
+											cliente.num_identificacion
+										);
+										$("#razon-social").val(cliente.nombre);
+										$("#direccion").val(cliente.direccion);
+										$("#ciudad").val(cliente.ciudad);
+										$("#telefono").val(cliente.telefono);
+										$("#correo").val(cliente.correo);
+										$("#estado_pedido").val(data.estado_pedido);
+										$("#fechaPedido").val(pedido.fecha_pedido);
+										$("#fechaRecibido").val(pedido.fecha_documento);
+										$("#fechaDespacho").val(pedido.fecha_despacho);
+										$("#tipo_pedido").val(data.tipo_pedido);
 
-										// Añadir los detalles del pedido a la tabla
-										data.detalles.forEach(function(detalle, index) {
-											var row = `
-												<tr class="pedido-detalle">
-													<th scope="row-index">${index + 1}</th>
-													<td>
-														<select name="detalles[${index}][tipo_prenda]" required>
-															<option value="">Seleccionar</option>
-															${enum_values.map(tipo => `
-																<option value="${tipo.value}" ${tipo.value === detalle.tipo_prenda ? 'selected' : ''}>
-																	${tipo.name}
-																</option>
-															`).join('')}
-														</select>
-													</td>
-													<td>
-														<select name="detalles[${index}][prenda]" required>
-															<option value="">Seleccionar</option>
-															${prendas.map(prenda => `
-																<option value="${prenda.id}" ${prenda.id === detalle.prenda ? 'selected' : ''}>
-																	${prenda.descripcion}
-																</option>
-															`).join('')}
-														</select>
-													</td>
-													<td>
-														<input type="text" name="detalles[${index}][material]" value="${detalle.material}" required />
-													</td>
-													<td>
-														<input type="number" name="detalles[${index}][cantidad]" value="${detalle.cantidad}" required />
-													</td>
-												</tr>
-											`;
-											$("#pedido-detalle-tbody").append(row);
+										var detalles = data.detalles;
+										console.log("Detalles del pedido:", detalles);
+										var tbody = $("#detallesPedido tbody");
+										tbody.empty();
+										$.each(detalles, function (index, detalle) {
+											tbody.append(`<tr>
+												<td><input type="text" name="detalles[${index}][tipo_prenda]" value="${detalle.tipo_prenda_id}" required /></td>
+												<td><input type="text" name="detalles[${index}][prenda]" value="${detalle.prenda_id}" required /></td>
+												<td><input type="text" name="detalles[${index}][material]" value="${detalle.material}" required /></td>
+												<td><input type="number" name="detalles[${index}][cantidad]" value="${detalle.cantidad}" required /></td>
+												<td><input type="text" name="detalles[${index}][medidas]" value="${detalle.medidas}" required /></td>
+											</tr>`);
 										});
 									} else {
-										alert(data.error);
+										alert("No se encontró el pedido");
 									}
 								},
 								error: function (error) {
@@ -287,17 +279,17 @@
 								},
 							});
 						} else {
+							// Limpiar campos si no hay número de pedido
+							$("#num_identificacion").val("");
 							$("#razon-social").val("");
 							$("#direccion").val("");
 							$("#ciudad").val("");
 							$("#telefono").val("");
 							$("#correo").val("");
-							$("#fechaRecibido").val("");
-							$("#pedido-detalle-tbody").empty();
 						}
-					});
+					}
 				});
-			</script>
-		</form>
+			});
+		</script> -->
 	</body>
 </html>
