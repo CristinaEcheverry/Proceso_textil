@@ -1,16 +1,12 @@
 from sqlalchemy import Column, SmallInteger, Enum
 from src.model import session, Base
 from src.model.enums.enum_estadoPedido import EstadoPedidoEnum
-from sqlalchemy.orm import relationship
 
 class EstadoPedido(Base):
     __tablename__ = 'estado_pedido'
     id = Column(SmallInteger, primary_key=True)
     estados = Column(Enum(EstadoPedidoEnum), nullable=False)
     
-    #se crea relacion con tabla pedidos
-    pedido = relationship('Pedido',backref='estado_pedido')
-
     def __init__(self, estados):
         self.estados =estados
 
