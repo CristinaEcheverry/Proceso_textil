@@ -1,85 +1,80 @@
 from src.app import app
-# from model import * -> Aquí se tiene que importar todos los modelos o clases
-from flask import render_template, redirect, request, url_for, flash  # render_template es para usar las vistas
-from src.model.pedido_model import Pedido, PedidoDetalle
+#Aquí se tiene que importar todos los modelos o clases
+from flask import render_template, redirect, request, url_for, flash 
+from src.model.pedido_model import Pedido
+from src.model.clientes_model import Clientes
+from src.model.tipoPrenda_model import TipoPrenda
+from src.model.prenda_model import Prenda
+from src.model.estadoPedido_model import EstadoPedido
+from src.model.tipoPedido_model import TipoPedido
 from flask_controller import FlaskController
 
 class ModificarPedidoController(FlaskController):
-    @app.route("/modificarPedido/<int:id>", methods=['GET', 'POST'])
+    @app.route("/modificarPedidoId/<int:id>", methods=['GET', 'POST'])
     def modificarPedidoId(id):
         '''Aquí va el código para modificar el pedido, se debe obtener el pedido y sus detalles para mostrarlos en la vista.
         La persona debe poder modificar los datos del pedido y sus detalles.'''
+        pedido = Pedido.obtener_pedido_id(id)
 
-        #Validar si el pedido existe en la db
-        pedido = Pedido.obtener_pedido(id)
-        if not pedido:
-            return  flash("Pedido no encontrado", error)
+        if request.method == 'POST':
+            try:
+                # Actualizar datos del cliente
+                nombre = request.form.get('nombre')
+                direccion = request.form.get('direccion')
+                ciudad = request.form.get('ciudad')
+                telefono = request.form.get('telefono')
+                correo = request.form.get('correo')
+                datos_cliente = Clientes(nombre, direccion, ciudad, telefono, correo)
+                print(datos_cliente)
+                datos_cliente.modificar_cliente()
 
-        #Validar si el cliente existe en la db
-        cliente = pedido.cliente
-        if not cliente:
-            flash('Cliente no encontrado', 'error')
-            return redirect(url_for('index'))
-        
-            if request.method == 'POST':
-                try:
-                    # Actualizar datos del cliente
-                    cliente.numero_identificacion = request.form.get('num_identificacion')
-                    cliente.nombre = request.form.get('nombre')
-                    cliente.direccion = request.form.get('direccion')
-                    cliente.ciudad = request.form.get('ciudad')
-                    cliente.telefono = request.form.get('telefono')
-                    cliente.correo = request.form.get('correo')
+                # Actualizar datos del pedido
+                estado = request.form.get('estado_pedido')
+                fecha_pedido = request.form.get('fecha_pedido')
+                fecha_documento = request.form.get('fecha_recibido')
+                fecha_despacho = request.form.get('fecha_despacho')
+                tipo_pedido = request.form.get('tipo_pedido')
+                datos_pedido = Pedido(estado, fecha_pedido, fecha_documento, fecha_despacho, tipo_pedido)
+                print(datos_pedido)
+                datos_pedido.modificar_pedido()
 
-                    # Actualizar datos del pedido
-                    pedido.estado = request.form.get('estado')
-                    pedido.fecha_pedido = request.form.get('fecha_pedido')
-                    pedido.fecha_documento = request.form.get('fecha_documento')
-                    pedido.fecha_despacho = request.form.get('fecha_despacho')
-                    pedido.tipo_pedido = request.form.get('tipo_pedido')
+                # Manejo de detalles del pedido                        
+                for idx, detalle in enumerate(pedido.detalle_pedido):
+                    detalle_form = {
+                        'tipo_prenda': request.form.get(f'detalles[{idx}][tipo_prenda]'),
+                        'prenda': request.form.get(f'detalles[{idx}][prenda]'),
+                        'material': request.form.get(f'detalles[{idx}][material]'),
+                        'cantidad': request.form.get(f'detalles[{idx}][cantidad]'),
+                        }
+                    if detalle_form['tipo_prenda']:
+                        detalle = pedido.detalle_pedido[idx]
+                        detalle.tipo_prenda_id = detalle_form['tipo_prenda']
+                        detalle.prenda_id = detalle_form['prenda']
+                        detalle.material = detalle_form['material']
+                        detalle.cantidad = detalle_form['cantidad']
+                        detalle.modificar_detalle() 
+                flash('Pedido actualizado exitosamente', 'success')
+                return render_template('modificarPedido_form.html', pedido=pedido)
+            except Exception as e:
+                flash(f'Error al actualizar el pedido: {str(e)}', 'error')
+                return redirect(url_for('modificarPedido'))
+        pedido = Pedido.obtener_pedido_id(id)
+        estado_pedido = EstadoPedido.obtener_estado_pedido()
+        tipos_pedido = TipoPedido.obtener_tipo_pedido()
+        tipo_prenda = TipoPrenda.obtener_tipo_prendas()
+        prenda = Prenda.obtener_prendas()
+        return render_template('modificarPedido_form.html', pedidos=pedido, enum_estadoPeValue=estado_pedido, enum_tipoPeValue=tipos_pedido, tipos_prenda=tipo_prenda, prendas=prenda)
 
-                    # Manejo de detalles del pedido
-                    for idx, detalle in enumerate(pedido.detalles):
-                        detalle_form = PedidoDetalle(request.form, prefix=f"detalles[{idx}]")
-                        if detalle_form.validate_on_submit():
-                            detalle.tipo_prenda = detalle_form.tipo_prenda.data
-                            detalle.prenda_id = detalle_form.prenda.data
-                            detalle.material = detalle_form.material.data
-                            detalle.cantidad = detalle_form.cantidad.data
-                            # detalle.medidas = detalle_form.medidas.data
-
-                            #mirar si este codigo funciona
-                            # for idx in range(len(pedido.detalles)):
-                            #     detalle_form = {
-                            #         'tipo_prenda': request.form.get(f'detalles[{idx}][tipo_prenda]'),
-                            #         'prenda': request.form.get(f'detalles[{idx}][prenda]'),
-                            #         'material': request.form.get(f'detalles[{idx}][material]'),
-                            #         'cantidad': request.form.get(f'detalles[{idx}][cantidad]'),
-                            #         'medidas': request.form.get(f'detalles[{idx}][medidas]')
-                            #      }
-                                # if detalle_form['tipo_prenda']:
-                                #     detalle = pedido.detalles[idx]
-                                #     detalle.tipo_prenda = detalle_form['tipo_prenda']
-                                #     detalle.prenda_id = detalle_form['prenda']
-                                #     detalle.material = detalle_form['material']
-                                #     detalle.cantidad = detalle_form['cantidad']
-                                #     detalle.medidas = detalle_form['medidas']
-                                #     detalle.modificar_detalle()  # Asume que este método existe para guardar los cambios
-                            
-                        # Crear el nuevo detalle del pedido
-                        nuevo_pedido_detalle = PedidoDetalle(tipo_prenda, prenda_id, material, cantidad)
-                        nuevo_pedido_detalle.modificar_detalle()
-                    flash('Pedido actualizado exitosamente', 'success')
-                    return redirect(url_for('modificarPedido', id=pedido_id.id))
-                except Exception as e:
-                    flash(f'Error al actualizar el pedido: {str(e)}', 'error')
-
-
-        pedido = Pedido.obtener_pedido()
-        pedido_detalles = PedidoDetalle.obtener_pedido_detalle(id)
-        return render_template('modificarPedido_form.html', pedido=pedido, pedido_detalle=pedido_detalles)
-
-    @app.route("/modificarPedido")
+    @app.route("/modificarPedido", methods=['GET', 'POST'])
     def modificarPedido():
-        return render_template('modificarPedido_form.html')
-            
+        if request.method == 'POST':
+            numero_pedido = request.form.get('num_pedido')
+            pedido = Pedido.obtener_pedido_dato(numero_pedido)
+            try:
+                if pedido:
+                    pedido_id = pedido['pedido'][0]['id']
+                    return redirect(url_for('modificarPedidoId', id=pedido_id))
+            except Exception as e:
+                flash(f'Error al buscar el pedido: {str(e)}', 'error')
+                return redirect(url_for('modificarPedido'))
+        return render_template('modificarPedido_boton.html')
