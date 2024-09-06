@@ -54,6 +54,8 @@ class Clientes(Base, SerializerMixin):
         return cliente.to_dict()
 
     def modificar_cliente(self):
+        session.dirty(self)
+        session.new(self)
         session.commit()
 
     def eliminar_cliente():
