@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}
+<title>Modificar Pedido</title>
+{% endblock %} {% block body %}
+
+<form id="modificarPedidoForm" method="POST" action="modificarPedido">
+	<header>
+		<h1>Modificar Pedido</h1>
+	</header>
+	<label for="num_pedido">Número de Pedido:</label>
+	<input type="text" id="num_pedido" name="num_pedido" required />
+	<button type="submit">Buscar Pedido</button>
+</form>
+{% endblock %}
