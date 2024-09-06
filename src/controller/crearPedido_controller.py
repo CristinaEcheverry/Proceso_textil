@@ -24,7 +24,8 @@ class PedidosController(FlaskController):
             Pedido.agregar_pedido(nuevo_pedido)
 
             # Agregar detalle del pedido
-            detalles = request.form.to_dict(flat=False)  # Obtener todos los datos del formulario
+            # Obtener todos los datos del formulario
+            detalles = request.form.to_dict(flat=False)  
             i = 0
             while f'detalles[{i}][tipo_prenda]' in detalles:
                 tipo_prenda_id = detalles[f'detalles[{i}][tipo_prenda]'][0]
@@ -53,36 +54,3 @@ class PedidosController(FlaskController):
                                 fecha=fecha_documento, 
                                 clientes=clientes, 
                                 nuevo_numero_pedido=nuevo_numero_pedido)
-
-    # #TODO ruta para modificar o actualizar el pedido por el numero de pedido 
-    # @app.route("/modificarPedido/<int:id>", methods=["GET", "POST"])
-    # def modificarPedido(id):
-    #     '''Aquí actualizará el pedido'''
-    #     if request.method == "POST":
-    #         # Aquí se tiene que hacer el update
-    #         id = request.form["id"]
-    #         estado = request.form["estado"]
-    #         fecha_entrega = request.form["fecha_entrega"]
-    #         fecha_pedido = request.form["fecha_pedido"]
-    #         total = request.form["total"]
-    #         id_cliente = request.form["id_cliente"]
-    #         id_producto = request.form["id_producto"]
-    #         cantidad = request.form["cantidad"]
-    #         precio = request.form["precio"]
-    #         actualPedido = Pedido.modificar_pedido(id, estado, fecha_entrega, fecha_pedido, total, id_cliente, id_producto, cantidad, precio)
-    #         return redirect(url_for("modificarPedido", id=id))
-    #     record = obtenerPedido(id)
-    #     return render_template("modificarPedido_form.html", title= "Modificar pedido", record=record)
-
-    # #TODO ruta para consultar el pedido
-    # @app.route("/consultarPedido", methods=["GET"])
-    # def consultarPedido():
-    #     pedidos = Pedido.obtener_pedido()
-    #     return render_template("consultarPedido.html", pedidos=pedidos)
-
-    # #TODO ruta para eliminar un pedido
-    # @app.route("/eliminarPedido/<int:id>", methods=["GET"])
-    # def eliminarPedido(id):
-    #     Pedido.eliminar_pedido(id)
-    #     return redirect(url_for("consultarPedido"))
-
