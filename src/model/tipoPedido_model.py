@@ -8,10 +8,6 @@ class TipoPedido(Base):
     id = Column(SmallInteger, primary_key=True)
     tipo_pedido = Column(Enum(TipoPedidoEnum), nullable=False)
     
-    
-    #se crea relacion con tabla pedidos
-    pedido = relationship('Pedido',backref='tipo_pedido')
-
     def __init__(self, tipo_pedido):
         self.tipo_pedido = tipo_pedido
 
