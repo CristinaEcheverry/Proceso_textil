@@ -16,10 +16,14 @@ class Pedido(Base):
     fecha_despacho = Column(Date)
     tipo_pedido_id = Column(SmallInteger, ForeignKey('tipo_pedido.id'), nullable=False)
 
-#relacion con tabla clientes
+    #relacion con tabla clientes
     clientes = relationship('Clientes', backref='pedido')
     #relacion con tabla Detalle_pedido
     detalle_pedido = relationship('PedidoDetalle', backref='pedido')
+    #relacion con tabla estado_pedido
+    estado_pedido = relationship('EstadoPedido', backref='pedido')
+    #relacion con tabla tipo_pedido
+    tipo_pedido = relationship('TipoPedido', backref='pedido')
 
     def __init__(self, numero_pedido, clientes_id, estado_pedido_id, 
     fecha_pedido, fecha_documento, fecha_despacho, tipo_pedido_id):    # tipo_prenda_id, prenda_id, material,cantidad
@@ -55,9 +59,32 @@ class Pedido(Base):
     @staticmethod
     def obtener_pedido_id(id):
         return session.query(Pedido).filter_by(id=id).first()
+    
+    def obtener_pedido_dato(numero_pedido):
+        pedido = session.query(Pedido).filter_by(numero_pedido=numero_pedido).options(
+            joinedload(Pedido.clientes),
+            joinedload(Pedido.estado_pedido),
+            joinedload(Pedido.tipo_pedido),
+            joinedload(Pedido.detalle_pedido)).one_or_none()   
+        
+        if pedido:
+            return {"pedido": [{"id": pedido.id, "numero_pedido": pedido.numero_pedido,
+            "fecha_pedido": pedido.fecha_pedido,
+            "fecha_documento": pedido.fecha_documento,
+            "fecha_despacho": pedido.fecha_despacho,
+            "tipo_pedido_id": pedido.tipo_pedido_id}],
+            "clientes_id": [{"tipo_identificacion":pedido.clientes.tipo_identificacion_id,"numero_identificacion": pedido.clientes.numero_identificacion,"nombre":pedido.clientes.nombre, "direccion": pedido.clientes.direccion, "ciudad": pedido.clientes.ciudad, "telefono": pedido.clientes.telefono, "correo": pedido.clientes.correo}],
+            "estado_pedido": pedido.estado_pedido_id,
+            "tipo_pedido": pedido.tipo_pedido_id,
+            "detalles": [{"tipo_prenda_id": detalle.tipo_prenda_id, "prenda_id": detalle.prenda_id, "material": detalle.material,"cantidad": detalle.cantidad} for detalle in pedido.detalle_pedido]
+            }
+        else:
+            return None  
 
     def modificar_pedido(self):
-        session.update(self)
+        '''Función que actualiza el pedido.'''
+        for pedido in self:
+            session.update(pedido)
         session.commit()
 
     def eliminar_pedido(self):
@@ -103,7 +130,8 @@ class PedidoDetalle(Base):
         session.commit()
 
     def obtener_pedido_detalle():
-        return session.query(PedidoDetalle).all()
+        return session.query(PedidoDetalle).options(joinedload(PedidoDetalle.pedido).joinedload(Pedido.clientes)).all()
+        # return session.query(PedidoDetalle).all()
 
     @staticmethod
     def obtener_detalle(pedido_id):
@@ -116,6 +144,8 @@ class PedidoDetalle(Base):
     
         # Incluye las relaciones en la carga de la consulta
         query = query.options(joinedload(Pedido.clientes).joinedload(Clientes.tipo_identificacion), joinedload(Pedido.estado_pedido))
+        if num_pedido:
+            query = query.filter(Pedido.numero_pedido == num_pedido)
         if tipo_identificacion:
             query = query.filter(TipoIdentificacion.codigo == tipo_identificacion)
         if num_identificacion:
@@ -124,8 +154,6 @@ class PedidoDetalle(Base):
             query = query.filter(Clientes.nombre == nombre)
         if estado_pedido_id:
             query = query.filter(EstadoPedido.estados == estado_pedido_id)
-        if num_pedido:
-            query = query.filter(Pedido.numero_pedido == num_pedido)
         if fecha_pedido:
             query = query.filter(Pedido.fecha_pedido == fecha_pedido)
         if fecha_despacho:
@@ -136,21 +164,12 @@ class PedidoDetalle(Base):
     def modificar_detalle(self):
         '''Función que modifica el detalle del pedido.'''
         for pedido in self:
-            session.update(pedido)
+            session.dirty(pedido)
+            # session.new(pedido)
         session.commit()
 
     def eliminar_pedido_detalle(self):
         '''Función que elimina el detalle pedido y el pedido.'''
         for pedido in self:
             session.delete(pedido)
-        session.commit()
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "pedido_id": self.pedido_id,
-            "tipo_prenda_id": self.tipo_prenda_id,
-            "prenda_id": self.prenda_id,
-            "material": self.material,
-            "cantidad": self.cantidad
-        }   
+        session.commit() 
