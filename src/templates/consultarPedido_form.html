@@ -1,87 +1,118 @@
 {% extends "base.html" %} {% block title %}<title>Consultar pedido</title>
-{% endblock %}
-{% block body %}
-	<form action="{{ url_for('consultarPedido') }}" method="post">
-		<div class="contenido">
-			<div class="titulo">
-				<header>
-					<h1>Consultar Pedido</h1>
-				</header>
-			</div>
-			<div class="Formulario">
-				<label for="tipo_ident">Tipo Identificación</label>
-				<select class="form-group" name="tipo_identificacion" id="tipo_ident">
-					<option selected value="">Seleccionar</option>
-					{% for i in tipoID%}
-					<option value="{{ i.id }}">{{ i.codigo.name }}</option>
-					{% endfor %}
-				</select>
-				<input type="text" class="form-group" name="num_identificacion" id="num-identificacion"
-					placeholder="Número de identificación">
-
-				<input type="text" class="info nombres" name="nombre" id="razon-social"
-					placeholder="Nombre o Razón Social" />
-				<br>
-				<input type="text" class="form-group" name="num_pedido" id="num-pedido"
-					placeholder="Número de pedido" />
-				<label  class="form-group" for="estado_pedido" >Estado Pedido </label>
-				<select name="estados" id="estado_pedido">
-					<option selected value="">Seleccionar</option>
-					{% for ep in estadoPedido %}
-						<option value="{{ep.id}}">{{ep.estados.name}}</option>
-					{% endfor %}
-				</select>
-				<label class="form-group">Fecha Pedido</label>
-				<input type="date" class="Formulario" id="fecha-pedido" name="fecha-pedido"
-					placeholder="Another input" />
-				<label class="form-group">Fecha entrega</label>
-				<input type="date" class="Formulario" id="fecha-despacho" name="fecha-despacho"
-					placeholder="Example input" />
-
-			</div>
+{% endblock %} {% block body %}
+<form action="{{ url_for('consultarPedido') }}" method="post">
+	<div class="contenido">
+		<div class="titulo">
+			<header>
+				<h1>Consultar Pedido</h1>
+			</header>
 		</div>
-		<button type="submit">Consultar</button>
-	</form>
-	
-	<table id="resultTable">
-		<tr>
-			<th>Id Pedido</th>
-			<th>Num. Pedido</th>
-			<th>Tipo Identificación</th>
-			<th>Num Identificación</th>
-			<th>Nombre o Razón Social</th>
-			<th>Estado</th>
-			<th>Fecha Pedido</th>
-			<th>Fecha Despacho</th>
-			<th>Dirección</th>
-			<th>Telefono</th>
-			<th>Correo</th>
-			<th>Editar</th>
-			<th>Eliminar</th>
-		</tr>
-		{% for pedido in pedidos %}
-		<tr>
-			<td>{{ pedido.id }}</td>
-			<td>{{ pedido.numero_pedido }}</td>
-			<td>{{ pedido.clientes.tipo_identificacion.codigo.value }}</td>
-			<td>{{ pedido.clientes.numero_identificacion }}</td>
-			<td>{{ pedido.clientes.nombre }}</td>
-			<td>{{ pedido.estado_pedido.estados.name }}</td>
-			<td>{{ pedido.fecha_pedido }}</td>
-			<td>{{ pedido.fecha_despacho }}</td>
-			<td>{{ pedido.clientes.direccion }}</td>
-			<td>{{ pedido.clientes.telefono }}</td>
-			<td>{{ pedido.clientes.correo }}</td>
-			<th><a href="#" class="btn" id=""></a>Editar</button></th>
-			<th><a href="{{url_for('eliminarPedido', id=pedido.id)}}" class="btn">Eliminar</a></th>
-		</tr>
-		{% endfor %}
-	</table>
-	<script>
-		$(document).ready(function () {
-			$("form").submit(function () {
-				$("#resultTable").show();
-			});
+		<div class="Formulario">
+			<label for="tipo_ident">Tipo Identificación</label>
+			<select class="form-group" name="tipo_identificacion" id="tipo_ident">
+				<option selected value="">Seleccionar</option>
+				{% for i in tipoID%}
+				<option value="{{ i.id }}">{{ i.codigo.name }}</option>
+				{% endfor %}
+			</select>
+			<input
+				type="text"
+				class="form-group"
+				name="num_identificacion"
+				id="num-identificacion"
+				placeholder="Número de identificación"
+			/>
+
+			<input
+				type="text"
+				class="info nombres"
+				name="nombre"
+				id="razon-social"
+				placeholder="Nombre o Razón Social"
+			/>
+			<br />
+			<input
+				type="text"
+				class="form-group"
+				name="num_pedido"
+				id="num-pedido"
+				placeholder="Número de pedido"
+			/>
+			<label class="form-group" for="estado_pedido">Estado Pedido </label>
+			<select name="estados" id="estado_pedido">
+				<option selected value="">Seleccionar</option>
+				{% for ep in estadoPedido %}
+				<option value="{{ep.id}}">{{ep.estados.name}}</option>
+				{% endfor %}
+			</select>
+			<label class="form-group">Fecha Pedido</label>
+			<input
+				type="date"
+				class="Formulario"
+				id="fecha-pedido"
+				name="fecha-pedido"
+				placeholder="Another input"
+			/>
+			<label class="form-group">Fecha entrega</label>
+			<input
+				type="date"
+				class="Formulario"
+				id="fecha-despacho"
+				name="fecha-despacho"
+				placeholder="Example input"
+			/>
+		</div>
+	</div>
+	<button type="submit">Consultar</button>
+</form>
+
+<table id="resultTable">
+	<tr>
+		<th>Id Pedido</th>
+		<th>Num. Pedido</th>
+		<th>Tipo Identificación</th>
+		<th>Num Identificación</th>
+		<th>Nombre o Razón Social</th>
+		<th>Estado</th>
+		<th>Fecha Pedido</th>
+		<th>Fecha Despacho</th>
+		<th>Dirección</th>
+		<th>Telefono</th>
+		<th>Correo</th>
+		<th>Editar</th>
+		<th>Eliminar</th>
+	</tr>
+	{% for pedido in pedidos %}
+	<tr>
+		<td>{{ pedido.id }}</td>
+		<td>{{ pedido.numero_pedido }}</td>
+		<td>{{ pedido.clientes.tipo_identificacion.codigo.value }}</td>
+		<td>{{ pedido.clientes.numero_identificacion }}</td>
+		<td>{{ pedido.clientes.nombre }}</td>
+		<td>{{ pedido.estado_pedido.estados.name }}</td>
+		<td>{{ pedido.fecha_pedido }}</td>
+		<td>{{ pedido.fecha_despacho }}</td>
+		<td>{{ pedido.clientes.direccion }}</td>
+		<td>{{ pedido.clientes.telefono }}</td>
+		<td>{{ pedido.clientes.correo }}</td>
+		<th>
+			<a href="{{url_for('modificarPedidoId', id=pedido.id)}}" class="btn"
+				>Editar</a
+			>
+		</th>
+		<th>
+			<a href="{{url_for('eliminarPedido', id=pedido.id)}}" class="btn"
+				>Eliminar</a
+			>
+		</th>
+	</tr>
+	{% endfor %}
+</table>
+<script>
+	$(document).ready(function () {
+		$("form").submit(function () {
+			$("#resultTable").show();
 		});
-	</script>
+	});
+</script>
 {% endblock %}
