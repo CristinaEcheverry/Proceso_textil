@@ -81,11 +81,9 @@ class Pedido(Base):
         else:
             return None  
 
-    def modificar_pedido(self):
+    def modificar_pedido():
         '''Función que actualiza el pedido.'''
-        for pedido in self:
-            session.update(pedido)
-        session.commit()
+        session.commit() 
 
     def eliminar_pedido(self):
         '''Función que elimina el pedido.'''
