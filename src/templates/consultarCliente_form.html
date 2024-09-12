@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}<title>Consultar cliente</title>
+{% endblock %} {% block body %}
+	<form action="consultarCliente" method="post">
+		<div class="contenido">
+            <div class="titulo">
+                <header>
+                    <h1>Consultar Cliente</h1>
+                </header>
+            </div>
+			<div class="Formulario">
+				<label for="tipo_ident">Tipo Identificación</label>
+                <select class="form-group" name="tipo_identificacion" id="tipo_ident">
+                    <option selected value="">Seleccionar</option>
+                    {% for i in tipoID%}
+                    <option value="{{ i.id }}">{{ i.codigo.name }}</option>
+                    {% endfor %}
+                </select>
+				<input
+					type="text"
+					class="info"
+					name="numero_identificacion"
+					id="num_identificacion"
+					placeholder="Número de identificacion"
+				/>
+            </div>
+            <button type="submit">Consultar</button>
+        </div>
+    </form>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>ID </th>
+                <th>Tipo Identificación</th>
+                <th>Número Identificación</th>
+                <th>Razón Social</th>
+                <th>Dirección</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Comandos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in cliente %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.tipo_identificacion.codigo.name }}</td>
+                <td>{{ c.numero_identificacion }}</td>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.direccion }}</td>
+                <td>{{ c.correo }}</td>
+                <td>{{ c.telefono }}</td>
+                <td>
+                    <a href="#">Editar</a>
+                    <a href="#">Eliminar</a>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function () {
+                $("#resultTable").show();
+            });
+        });
+    </script>
+{% endblock %}
