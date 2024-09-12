@@ -19,24 +19,20 @@ class ModificarPedidoController(FlaskController):
         if request.method == 'POST':
             try:
                 # Actualizar datos del cliente
-                nombre = request.form.get('nombre')
-                direccion = request.form.get('direccion')
-                ciudad = request.form.get('ciudad')
-                telefono = request.form.get('telefono')
-                correo = request.form.get('correo')
-                datos_cliente = Clientes(nombre, direccion, ciudad, telefono, correo)
-                print(datos_cliente)
-                datos_cliente.modificar_cliente()
+                pedido.clientes.nombre = request.form.get('nombre')
+                pedido.clientes.direccion = request.form.get('direccion')
+                pedido.clientes.ciudad = request.form.get('ciudad')
+                pedido.clientes.telefono = request.form.get('telefono')
+                pedido.clientes.correo = request.form.get('correo')
+                print(pedido.clientes.nombre, pedido.clientes.direccion, pedido.clientes.ciudad, pedido.clientes.telefono, pedido.clientes.correo)            
 
                 # Actualizar datos del pedido
-                estado = request.form.get('estado_pedido')
-                fecha_pedido = request.form.get('fecha_pedido')
-                fecha_documento = request.form.get('fecha_recibido')
-                fecha_despacho = request.form.get('fecha_despacho')
-                tipo_pedido = request.form.get('tipo_pedido')
-                datos_pedido = Pedido(estado, fecha_pedido, fecha_documento, fecha_despacho, tipo_pedido)
-                print(datos_pedido)
-                datos_pedido.modificar_pedido()
+                pedido.estado_pedido.estados = request.form.get('estados')
+                pedido.fecha_pedido = request.form.get('fecha_pedido')
+                pedido.fecha_documento = request.form.get('fecha_recibido')
+                pedido.fecha_despacho = request.form.get('fecha_despacho')
+                pedido.tipo_pedido.tipo_pedido = request.form.get('tipos')
+                print(pedido.estado_pedido.estados, pedido.fecha_pedido, pedido.fecha_documento, pedido.fecha_despacho, pedido.tipo_pedido.tipo_pedido)
 
                 # Manejo de detalles del pedido                        
                 for idx, detalle in enumerate(pedido.detalle_pedido):
@@ -52,7 +48,8 @@ class ModificarPedidoController(FlaskController):
                         detalle.prenda_id = detalle_form['prenda']
                         detalle.material = detalle_form['material']
                         detalle.cantidad = detalle_form['cantidad']
-                        detalle.modificar_detalle() 
+                        print(detalle.tipo_prenda_id, detalle.prenda_id, detalle.material, detalle.cantidad)
+                Pedido.modificar_pedido()
                 flash('Pedido actualizado exitosamente', 'success')
                 return render_template('modificarPedido_form.html', pedido=pedido)
             except Exception as e:
