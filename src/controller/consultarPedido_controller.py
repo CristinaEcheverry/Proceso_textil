@@ -52,7 +52,7 @@ class ConsultarPedidoController(FlaskController):
         '''Aquí va el código para eliminar un pedido.'''
         pedido = Pedido.obtener_pedido_id(id)
         detalle = PedidoDetalle.obtener_detalle(pedido_id=id)
-        pedido_eliminado = Pedido.eliminar_pedido(pedido)
-        detalle_eliminado = PedidoDetalle.eliminar_pedido_detalle(detalle)  
+        Pedido.eliminar_pedido(pedido)
+        PedidoDetalle.eliminar_pedido_detalle(detalle)  
         flash("Pedido eliminado correctamente.")      
         return redirect(url_for('consultarPedido'))
