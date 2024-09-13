@@ -1,0 +1,104 @@
+{% extends "base.html" %} {% block title %}<title>Modificar cliente</title>
+{% endblock %} {% block body %}
+<section>
+	<form action="{{ url_for('actualizarCliente' , id=cliente.id) }}" method="post">
+		<div class="contenido">
+			<div class="titulo">
+				<header>
+					<h1>Modificar Cliente</h1>
+				</header>
+			</div>
+			<div class="Formulario">
+				<label for="tipo_ident">Tipo Identificación</label>
+				<select name="tipo_identificacion" id="tipo_ident">
+					{% for i in identificacion %}
+					<option value="{{ i.id }}"{% if i.id == cliente.tipo_identificacion_id %}selected{% endif %}>
+						{{ i.codigo.name }}
+					</option>
+					{% endfor %}
+				</select>
+				<label class="form-group">Número Identificación</label>
+				<input
+					type="text"
+					class="info"
+					name="numero_identificacion"
+					id="num_identificacion"
+					value="{{ cliente.numero_identificacion }}"
+					required
+				/>
+				<br />
+				<label for="tipo-persona">Tipo persona </label>
+				<select name="tipo_persona" id="tipo-persona">
+					{% for tp in tipoPersona %}
+					<option value="{{ tp.id }}"
+					{% if tp.id == cliente.tipo_persona_id %}selected{% endif %}>
+						{{ tp.tipo_persona.name }}</option>
+					{% endfor %}
+				</select>
+				<br />
+				<label class="form-group">Nombre o Razón Social</label>
+				<input
+					type="text"
+					class="info nombres"
+					name="nombre"
+					id="razon-social"
+					value="{{ cliente.nombre }}"
+					required
+				/>
+				<br />
+				<label class="form-group">Dirección</label>
+				<input
+					type="text"
+					class="info"
+					name="direccion"
+					id="direccion"
+					value="{{ cliente.direccion }}"
+					required
+				/>
+				<label class="form-group">Ciudad</label>
+				<input
+					type="text"
+					class="info"
+					name="ciudad"
+					id="ciudad"
+					value="{{ cliente.ciudad }}"
+					required
+				/>
+				<br />
+				<label class="form-group">Telefono</label>
+				<input
+					type="text"
+					class="info"
+					name="telefono"
+					id="telefono"
+					value="{{ cliente.telefono }}"
+					required
+				/>
+				<br />
+				<label class="form-group">Correo Electronico</label>
+				<input
+					type="email"
+					class="info"
+					name="correo"
+					id="correo"
+					value="{{ cliente.correo }}"
+					required
+				/>
+				<br />
+			</div>
+			<div class="fechas">
+				<label class="form-group" for="fechaRecibido"
+					>Fecha documento:</label
+				>
+				<input
+					type="date"
+					class="info"
+					name="fecha_recibido"
+					id="fechaRecibido"
+				/><br />
+			</div>
+		</div>
+		<button type="submit">Modificar</button>
+	</form>
+</section>
+{% endblock %}

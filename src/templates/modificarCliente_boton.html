@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}
+<title>Modificar Cliente</title>
+{% endblock %} {% block body %}
+
+<form id="modificarClienteForm" method="POST" action="modificarCliente">
+	<header>
+		<h1>Modificar Cliente</h1>
+	</header>
+	<label class="form-group">Número Identificación</label>
+	<input
+		type="text"
+		class="info"
+		name="numero_identificacion"
+		id="num_identificacion"
+	/>
+	<br />
+	<button class="btn-center" type="submit">Buscar</button>
+</form>
+{% endblock %}
