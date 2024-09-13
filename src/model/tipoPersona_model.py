@@ -8,9 +8,6 @@ class TipoPersona(Base):
     id = Column(SmallInteger, primary_key=True)
     tipo_persona = Column(Enum(TipoPersonaEnum), nullable=False)
 
-    #se crea relacion con tabla clientes
-    cliente = relationship('Clientes',backref='clientes_tipo_persona')
-    
     def __init__(self, tipo_persona):
         self.tipo_persona = tipo_persona
     
