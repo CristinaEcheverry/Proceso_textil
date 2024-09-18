@@ -1,23 +1,13 @@
 :root {
 	--blue: #007bff;
 	--indigo: #6610f2;
-	--purple: #6f42c1;
-	--pink: #e83e8c;
-	--red: #dc3545;
-	--orange: #fd7e14;
-	--yellow: #ffc107;
-	--green: #28a745;
-	--teal: #20c997;
 	--cyan: #17a2b8;
 	--white: #fff;
 	--gray: #6c757d;
 	--gray-dark: #343a40;
 	--primary: #007bff;
 	--secondary: #6c757d;
-	--success: #28a745;
 	--info: #17a2b8;
-	--warning: #ffc107;
-	--danger: #dc3545;
 	--light: #f8f9fa;
 	--dark: #343a40;
 	--breakpoint-xs: 0;
@@ -49,11 +39,6 @@ ul {
 }
 a {
 	text-decoration: none;
-	color: #000;
-}
-
-aside {
-	background-color: #004aad;
 	color: white;
 }
 
@@ -89,9 +74,9 @@ footer {
 
 #panel_navegation {
 	margin-top: 10px;
-	background-color: #004aad;
 	float: left;
 	border-radius: 20px 20px 20px 20px;
+	color: black;
 }
 
 .titulo {
@@ -109,6 +94,10 @@ footer {
 	margin: 5%;
 	display: block;
 	cursor: pointer;
+	transition: all 0.3s;
+	border-radius: 10%;
+	background-color: #004aad;
+	color: white;
 }
 
 .opciones:hover {

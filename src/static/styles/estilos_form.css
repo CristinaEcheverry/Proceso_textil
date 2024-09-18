@@ -40,8 +40,21 @@ body {
 	margin: 1%;
 }
 
-input {
+input,
+select {
 	height: 30px;
+	border-radius: 7px;
+}
+
+.materiales {
+	background-color: #5781b9;
+	border-color: rgba(118, 118, 118, 0.3);
+	box-sizing: border-box;
+	color: white;
+}
+
+::placeholder {
+	color: white;
 }
 
 /* estilos de la tabla */
