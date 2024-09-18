@@ -35,7 +35,4 @@ class EstadoMaterialEnum(Enum):
     EN_VERIFICACION = 32
     EN_CERTIFICACION = 33
     EN_ETIQUETADO = 34
-    
-    def __int__(self):
-        return self.value   
       
