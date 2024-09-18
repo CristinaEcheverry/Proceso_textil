@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block body %}
+{% extends "base.html" %} {% block title %}<title>Crear Material</title> {%
+endblock %} {% block stylesheets %}
+<link
+	rel="stylesheet"
+	href="{{url_for('static', filename='styles/estilos_form.css')}}"
+/>
+{% endblock %} {% block body %}
 <form action="ingresoMaterial" method="post">
 	<div class="contenedor-info">
 		<div class="titulo">
@@ -14,29 +20,63 @@
 	</div>
 	<div class="contenido">
 		<div class="Formulario">
-			<label for="codigo-material">Código</label>
-			<input type="text" name="codigo_material" id="codigo-material" /><br />
+			<input
+				class="materiales"
+				type="text"
+				name="codigo_material"
+				id="codigo-material"
+				placeholder="Código"
+			/>
+			<input
+				class="materiales"
+				type="text"
+				name="num_lote"
+				id="lot-number"
+				placeholder="No. Lote"
+			/>
+			<br />
+			<input
+				class="materiales"
+				type="text"
+				name="producto"
+				id="product"
+				placeholder="Producto"
+			/><br />
+			<input
+				class="materiales"
+				type="text"
+				name="proveedor"
+				id="supplier"
+				placeholder="Proveedor"
+			/><br />
 
-			<label for="lot-number">No. Lote</label>
-			<input type="text" name="num_lote" id="lot-number" /><br />
+			<input
+				class="materiales"
+				type="number"
+				name="amount"
+				id="amount"
+				placeholder="Cantidad"
+			/>
+			<select class="materiales" name="unidad" id="unit">
+				<option selected value="">Unidad</option>
+				{% for um in u_m %}
+				<option value="{{um.value}}">{{um.name}}</option>
+				{% endfor %}
+			</select>
+			<input
+				class="materiales"
+				type="text"
+				name="color"
+				id="color"
+				placeholder="Color"
+			/>
 
-			<label for="product">Producto:</label>
-			<input type="text" name="producto" id="product" /><br />
-
-			<label for="amount">Cantidad</label>
-			<input type="number" name="amount" id="amount" /><br />
-
-			<label for="supplier">Proveedor</label>
-			<input type="text" name="proveedor" id="supplier" /><br />
-
-			<label for="color">Color</label>
-			<input type="text" name="color" id="color" /><br />
-
-			<label for="estado-material">Estado material</label>
-			<select name="estado_material" id="estado-material">
-				<option selected value="">Seleccionar</option>
-				{% for estado in enum_estadoMaterial %}
-				<option value="{{estado.value}}">{{estado.name}}</option>
+			<select class="materiales" name="estado_material" id="estado-material">
+				<option selected value="">Estado material</option>
+				{% for estado in estadoMaterial %}
+				<option value="{{estado.id}}">
+					{{estado.estado_material.name}}
+				</option>
 				{% endfor %}
 			</select>
 			<br />
@@ -49,8 +89,7 @@
 				placeholder="Descripción"
 			></textarea>
 		</div>
-		<div class="fechas">{% include "fechas.html" %}</div>
 	</div>
-	<button type="submit">Crear Material</button>
+	<button type="submit">Registrar</button>
 </form>
 {% endblock %}

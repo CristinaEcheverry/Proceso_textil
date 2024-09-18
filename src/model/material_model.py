@@ -1,29 +1,36 @@
 import datetime
-from sqlalchemy import Column, Float, Integer, String, Enum, DateTime
+from sqlalchemy import Column, Float, Integer, String, ForeignKey, DateTime, Enum
 from src.model import session, Base
-from src.model.enums.enum_estadoMaterial import EstadoMaterialEnum
+from sqlalchemy.orm import relationship, joinedload
+from src.model.estadoMaterial_model import EstadoMaterial
+from src.model.enums.enum_unidadMedida import UnidadMedidaEnum
 
 class Material(Base):
     __tablename__ = 'material'
     id = Column(Integer, primary_key=True)
-    codigo = Column(String(10), unique=True, nullable=False)
-    num_lote = Column(String(10), nullable=False)
+    codigo = Column(String(20), unique=True, nullable=False)
+    num_lote = Column(String(50), nullable=False)
     producto = Column(String(50), nullable=False)
-    cantidad = Column(Float, nullable=False)
     proveedor = Column(String(50), nullable=False)
-    color = Column(String(20), nullable=False)
-    estado_material = Column(Enum(EstadoMaterialEnum), nullable=False)
+    cantidad = Column(Float, nullable=False)
+    unidad_medida = Column(Enum(UnidadMedidaEnum), nullable=False)
+    color = Column(String(50), nullable=False)
+    estado_material_id = Column(Integer, ForeignKey('estado_material.id'), nullable=False)
     descripcion = Column(String(300))
     fecha_documento = Column(DateTime, default=datetime.datetime.now())
     
-    def __init__(self, codigo, num_lote, producto, cantidad, proveedor, color, estado_material, descripcion, fecha_documento):
+    #relacion con estado_material
+    estado_material = relationship('EstadoMaterial', back_populates='materiales')
+
+    def __init__(self, codigo, num_lote, producto, proveedor, cantidad, unidad_medida, color, estado_material_id, descripcion, fecha_documento):
         self.codigo = codigo
         self.num_lote = num_lote
         self.producto = producto
-        self.cantidad = cantidad
         self.proveedor = proveedor
+        self.cantidad = cantidad
+        self.unidad_medida = unidad_medida
         self.color = color
-        self.estado_material = estado_material
+        self.estado_material_id = estado_material_id
         self.descripcion = descripcion
         self.fecha_documento = fecha_documento
 
@@ -34,32 +41,37 @@ class Material(Base):
             'codigo': self.codigo,
             'num_lote': self.num_lote,
             'producto': self.producto,
-            'cantidad': self.cantidad,
             'proveedor': self.proveedor,
+            'cantidad': self.cantidad,
+            'unidad_medida': self.unidad_medida.value,
             'color': self.color,
-            'estado_material': self.estado_material.value,
+            'estado_material': self.estado_material_id.value,
             'descripcion': self.descripcion
         }
 
     def agregar_material(material):
-        material = session.add(material)
+        session.add(material)
         session.commit()
-        return material
 
     @staticmethod
     def obtener_material():
-        material = session.query(Material).all()
-        return material
+        return session.query(Material).all()
     
     @staticmethod
-    def obtener_material_codigo(codigo):
-        material = session.query(Material).filter(Material.codigo==codigo).first()
-        return material
+    def obtener_material_criterio(codigo=None, producto=None, estado_material=None):
+        query = session.query(Material).join(Material.estado_material)
+        query = query.options(joinedload(Material.estado_material))
+        if codigo:
+            query = query.filter(Material.codigo == codigo)
+        elif producto:
+            query = query.filter(Material.producto == producto)
+        elif estado_material:
+            query = query.filter(Material.estado_material_id == estado_material)
+        return query.all()
     
     @staticmethod
     def obtener_material_id(id):
-        material = session.query(Material).get(id)
-        return material.to_dict()
+        return session.query(Material).filter_by(id=id).first()
 
     def modificar_material(self):
         session.commit()
