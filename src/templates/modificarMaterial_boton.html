@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}<title>Modificar Material</title> {%
+endblock %} {% block stylesheets %}
+<link
+	rel="stylesheet"
+	href="{{url_for('static', filename='styles/estilos_form.css')}}"
+/>
+{% endblock %} {% block body %}
+<form action="modificarMaterial" method="post">
+	<div class="contenedor-info">
+		<div class="titulo">
+			<header>
+				<h1>Modificar Material</h1>
+			</header>
+		</div>
+		<!-- cambiar name y en css -->
+		<div class="id-pedido">
+			<!-- aqui va el nombre del usuario que esta creando el material -->
+			<p>Nombre usuario</p>
+		</div>
+	</div>
+	<div class="contenido">
+		<div class="Formulario">
+			<input
+				class="materiales"
+				type="text"
+				name="codigo_material"
+				id="codigo-material"
+				value="Código"
+				required
+			/>
+			<input
+				class="materiales"
+				type="text"
+				name="producto"
+				id="product"
+				value="Producto"
+				required
+			/><br />
+		</div>
+	</div>
+	<button type="submit">Modificar</button>
+</form>
+{% endblock %}

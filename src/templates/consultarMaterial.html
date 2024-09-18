@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %}<title>Consultar Material</title>
+{% endblock %}{% block stylesheets %}
+<link
+	rel="stylesheet"
+	href="{{url_for('static', filename='styles/estilos_form.css')}}"
+/>
+{% endblock %} {% block body %}
+<form action="{{ url_for('consultarMaterial') }}" method="post">
+	<div class="contenedor-info">
+		<div class="titulo">
+			<header>
+				<h1>Consultar Material</h1>
+			</header>
+		</div>
+		<!-- cambiar name y en css -->
+		<div class="id-pedido">
+			<!-- aqui va el nombre del usuario que esta creando el material -->
+			<p>Nombre usuario</p>
+		</div>
+	</div>
+	<div class="contenido">
+		<div class="Formulario">
+			<input
+				class="materiales"
+				type="text"
+				name="codigo_material"
+				id="codigo-material"
+				placeholder="Código"
+			/>
+			<input
+				class="materiales"
+				type="text"
+				name="producto"
+				id="product"
+				placeholder="Producto"
+			/>
+			<select class="materiales" name="estado_material" id="estado-material">
+				<option selected value="">Estado material</option>
+				{% for estado in estados_materiales %}
+				<option value="{{estado.id}}">
+					{{estado.estado_material.name}}
+				</option>
+				{% endfor %}
+			</select>
+			<br />
+			<br />
+		</div>
+	</div>
+	<button class="btn-center" type="submit">Consultar</button>
+</form>
+
+{% if material %}
+<table id="resultTable">
+	<tr>
+		<th>Id Material</th>
+		<th>Código</th>
+		<th>Num. lote</th>
+		<th>Producto</th>
+		<th>Color</th>
+		<th>Proveedor</th>
+		<th>Estado Material</th>
+		<th>Editar</th>
+		<th>Eliminar</th>
+	</tr>
+	{% for m in material %}
+	<tr>
+		<td>{{ m.id }}</td>
+		<td>{{ m.codigo }}</td>
+		<td>{{ m.num_lote }}</td>
+		<td>{{ m.producto }}</td>
+		<td>{{ m.color }}</td>
+		<td>{{ m.proveedor }}</td>
+		<td>{{ m.estado_material.estado_material.name }}</td>
+		<th>
+			<a href="{{ url_for('actualizarMaterial', id=m.id) }}" class="btn"
+				>Editar</a
+			>
+		</th>
+		<th>
+			<a href="{{ url_for('eliminarMaterial', id= m.id)}}" class="btn"
+				>Eliminar</a
+			>
+		</th>
+	</tr>
+	{% endfor %}
+</table>
+{% endif %}
+
+<script>
+	$(document).ready(function () {
+		$("form").submit(function () {
+			$("#resultTable").show();
+		});
+	});
+</script>
+{% endblock %}
